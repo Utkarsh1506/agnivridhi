@@ -26,14 +26,17 @@
         }
     });
 
-    // Hero Testimonial Carousel
+    // Hero Testimonial Carousel with variable-width cards
     $(".testimonial-hero-carousel").owlCarousel({
         autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true,
         smartSpeed: 1500,
         center: false,
         dots: false,
         loop: true,
         margin: 25,
+        stagePadding: 30,
         nav : true,
         navText : [
             '<i class="fa fa-angle-right"></i>',
@@ -42,19 +45,24 @@
         responsiveClass: true,
         responsive: {
             0:{
-                items:1
+                items:1,
+                stagePadding: 20
             },
             576:{
-                items:1
+                items:1,
+                stagePadding: 40
             },
             768:{
-                items:2
+                items:2,
+                stagePadding: 50
             },
             992:{
-                items:2
+                items:2,
+                stagePadding: 60
             },
             1200:{
-                items:3
+                items:3,
+                stagePadding: 80
             }
         }
     });

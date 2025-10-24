@@ -941,10 +941,101 @@ html[data-theme="light"] .btn.btn-light {
 .testimonial-hero-carousel .testimonial-hero-item {
     scroll-snap-align: center;
     margin: 0 12px;
-    min-width: 340px;
-    max-width: 420px;
     display: inline-block;
     vertical-align: top;
+    min-width: 380px;
+    max-width: 400px;
+    height: 380px;
+}
+
+/* Remove variable card sizes - all cards same size now */
+.testimonial-hero-carousel .testimonial-compact,
+.testimonial-hero-carousel .testimonial-medium,
+.testimonial-hero-carousel .testimonial-large {
+    min-width: 380px;
+    max-width: 400px;
+    height: 380px;
+}
+
+/* Text truncation for excerpts */
+.testimonial-excerpt {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Read More button styling */
+.testimonial-hero-item .btn-outline-primary {
+    border: 2px solid #0891b2;
+    color: #0891b2;
+    transition: all 0.3s ease;
+}
+
+.testimonial-hero-item .btn-outline-primary:hover {
+    background: linear-gradient(135deg, #0891b2 0%, #2dd4bf 100%);
+    border-color: #0891b2;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.25);
+}
+
+.testimonial-hero-item .btn-outline-primary:hover i {
+    transform: translateX(4px);
+}
+
+.testimonial-hero-item .btn-primary {
+    background: linear-gradient(135deg, #0891b2 0%, #2dd4bf 100%);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.testimonial-hero-item .btn-primary:hover {
+    background: linear-gradient(135deg, #2dd4bf 0%, #0891b2 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(8, 145, 178, 0.3);
+}
+
+.testimonial-hero-item .btn-primary:hover i {
+    transform: translateX(4px);
+}
+
+.testimonial-hero-item .btn i {
+    transition: transform 0.3s ease;
+}
+
+/* Enhanced card styling */
+.testimonial-hero-item .card {
+    transition: all 0.3s ease;
+}
+
+.testimonial-hero-item .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(8, 145, 178, 0.2) !important;
+}
+
+/* Responsive adjustments for uniform card sizes */
+@media (max-width: 768px) {
+    .testimonial-hero-carousel .testimonial-hero-item,
+    .testimonial-hero-carousel .testimonial-compact,
+    .testimonial-hero-carousel .testimonial-medium,
+    .testimonial-hero-carousel .testimonial-large {
+        min-width: 300px;
+        max-width: 340px;
+        height: auto;
+        min-height: 360px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+    .testimonial-hero-carousel .testimonial-hero-item,
+    .testimonial-hero-carousel .testimonial-compact,
+    .testimonial-hero-carousel .testimonial-medium,
+    .testimonial-hero-carousel .testimonial-large {
+        min-width: 360px;
+        max-width: 380px;
+        height: 370px;
+    }
 }
 
 /* Add a floating icon badge to each card */
@@ -1257,6 +1348,92 @@ html[data-theme="light"] .btn.btn-light {
 .service .service-item:hover .service-img img {
     transform: scale(1.2);
 }
+
+/* Service Category Tabs */
+.service-tabs-container {
+    position: relative;
+}
+
+.service-category-tabs {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(8, 145, 178, 0.15);
+    border-radius: 50px;
+    padding: 8px;
+    display: inline-flex;
+    box-shadow: 0 4px 16px rgba(8, 145, 178, 0.1);
+}
+
+.service-category-tabs .nav-item {
+    margin: 0 4px;
+}
+
+.service-category-tabs .nav-link {
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #0891b2;
+    background: transparent;
+    border: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.service-category-tabs .nav-link:hover {
+    background: rgba(8, 145, 178, 0.1);
+    color: #0e7490;
+    transform: translateY(-2px);
+}
+
+.service-category-tabs .nav-link.active {
+    background: linear-gradient(135deg, #0891b2 0%, #14b8a6 50%, #2dd4bf 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(8, 145, 178, 0.3);
+    transform: translateY(-2px);
+}
+
+.service-category-tabs .nav-link i {
+    font-size: 16px;
+}
+
+/* Tab content animation */
+.tab-pane {
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive tabs */
+@media (max-width: 768px) {
+    .service-category-tabs {
+        flex-direction: column;
+        border-radius: 15px;
+        width: 100%;
+    }
+    
+    .service-category-tabs .nav-item {
+        margin: 4px 0;
+        width: 100%;
+    }
+    
+    .service-category-tabs .nav-link {
+        width: 100%;
+        text-align: center;
+        padding: 14px 20px;
+    }
+}
+
 /*** Service End ***/
 
 
