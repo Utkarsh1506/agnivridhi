@@ -1,0 +1,61 @@
+# Agnivridhi India - Git Ignore File
+# Protects sensitive information from being committed
+
+# Configuration files with credentials
+api/config.php
+config.php
+.env
+.env.local
+
+# API Keys and Secrets
+*secret*
+*apikey*
+*credentials*
+
+# Logs
+*.log
+logs/
+api/logs/
+
+# Backups
+backups/
+*.sql
+*.csv
+api/backups/
+
+# Database
+*.sqlite
+*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Node modules (if using Node.js tools)
+node_modules/
+package-lock.json
+
+# Composer (if using PHP dependencies)
+vendor/
+composer.lock
+
+# Test files
+test-*.html
+debug-*.php
+
+# Private notes
+PRIVATE-NOTES.md
+TODO-PRIVATE.md

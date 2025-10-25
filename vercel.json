@@ -1,0 +1,12 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/offer", "destination": "/success-stories", "permanent": true },
+    { "source": "/offer.html", "destination": "/success-stories", "permanent": true },
+    { "source": "/testimonial", "destination": "/success-stories", "permanent": true },
+    { "source": "/testimonial.html", "destination": "/success-stories", "permanent": true },
+    { "source": "/offers", "destination": "/success-stories", "permanent": true },
+    { "source": "/testimonials", "destination": "/success-stories", "permanent": true }
+  ]
+}

@@ -304,7 +304,18 @@ a.text-primary:hover {
 }
 
 .animated-gradient {
-    background: linear-gradient(270deg, #0891b2, #2dd4bf, #14b8a6, #0891b2);
+    .floating-whatsapp {
+        position: fixed;
+        right: 18px;
+        bottom: 90px; /* sits above back-to-top */
+        z-index: 1040;
+        width: 52px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+        /* floating WhatsApp styles removed */
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -946,6 +957,28 @@ html[data-theme="light"] .btn.btn-light {
     min-width: 380px;
     max-width: 400px;
     height: 380px;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(0.90);
+    opacity: 0.7;
+    position: relative;
+}
+
+/* Center card popup effect */
+.testimonial-hero-carousel .owl-item.center .testimonial-hero-item {
+    transform: scale(1.05);
+    opacity: 1;
+    z-index: 10;
+    box-shadow: 0 16px 48px rgba(8, 145, 178, 0.25);
+}
+
+/* Add extra margin to prevent overlap */
+.testimonial-hero-carousel .owl-item {
+    padding: 30px 15px;
+}
+
+.testimonial-hero-carousel .owl-stage-outer {
+    padding: 30px 0;
+    overflow: visible;
 }
 
 /* Remove variable card sizes - all cards same size now */
@@ -1006,7 +1039,12 @@ html[data-theme="light"] .btn.btn-light {
 
 /* Enhanced card styling */
 .testimonial-hero-item .card {
-    transition: all 0.3s ease;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.testimonial-hero-carousel .owl-item.center .testimonial-hero-item .card {
+    box-shadow: 0 20px 60px rgba(8, 145, 178, 0.3) !important;
 }
 
 .testimonial-hero-item .card:hover {
@@ -2003,4 +2041,67 @@ html[data-theme="light"] .btn.btn-light {
     color: #0891b2 !important;
 }
 
+
+ 
+ 
+/* ============================= */
+/* Consultation Modal Styles */
+/* ============================= */
+#consultationModal .modal-content {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#consultationModal .modal-header {
+    background: linear-gradient(135deg, #0891b2 0%, #155e75 100%);
+    padding: 1.5rem;
+}
+
+#consultationModal .modal-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+#consultationModal .form-label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+#consultationModal .form-control,
+#consultationModal .form-select {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    transition: all 0.3s ease;
+}
+
+#consultationModal .form-control:focus,
+#consultationModal .form-select:focus {
+    border-color: #0891b2;
+    box-shadow: 0 0 0 0.2rem rgba(8, 145, 178, 0.15);
+}
+
+#consultationModal .btn-primary {
+    background: linear-gradient(135deg, #0891b2 0%, #155e75 100%);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+#consultationModal .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(8, 145, 178, 0.3);
+}
+
+#consultationModal .form-check-input:checked {
+    background-color: #0891b2;
+    border-color: #0891b2;
+}
+
+#consultationModal textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
 
