@@ -335,7 +335,116 @@
         });
     }
 
+    // Contact Form Handler
+    $('#contactForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        // Disable submit button
+        var $submitBtn = $(this).find('button[type="submit"]');
+        var originalBtnText = $submitBtn.html();
+        $submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-2"></i>Sending...');
+        
+        // Hide previous messages
+        $('#contactFormSuccess, #contactFormError').addClass('d-none');
+        
+        // Execute reCAPTCHA v3
+        if (typeof grecaptcha !== 'undefined') {
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LePnfYrAAAAADeuSp1IJtJ_fyCSsEB9y-BVCoqz', {action: 'contact'}).then(function(token) {
+                    submitContactForm(token, $submitBtn, originalBtnText);
+                });
+            });
+        } else {
+            submitContactForm(null, $submitBtn, originalBtnText);
+        }
+    });
+    
+    function submitContactForm(recaptchaToken, $submitBtn, originalBtnText) {
+        // Get form data
+        var formData = {
+            fullName: $('#contactName').val(),
+            mobile: $('#contactPhone').val(),
+            email: $('#contactEmail').val(),
+            businessName: $('#contactProject').val() || 'Not Provided',
+            businessType: 'Contact Form Inquiry',
+            fundingRequired: 'N/A',
+            serviceInterested: $('#contactSubject').val(),
+            message: $('#contactMessage').val(),
+            timestamp: new Date().toISOString(),
+            source: 'Contact Page - ' + window.location.href
+        };
+        
+        // Track with Google Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'form_submission', {
+                event_category: 'Contact Form',
+                event_label: 'Contact Page',
+                value: 1
+            });
+        }
+        
+        // Send to Google Sheets
+        var googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbzoZ4xX4i4zg1_3x1VbhsU7CQ3ayZmgAnehf_cFMip2J2bxCctIqXAFYBUYvc94ogrV/exec';
+        
+        var params = new URLSearchParams();
+        params.append('fullName', formData.fullName);
+        params.append('mobile', formData.mobile);
+        params.append('email', formData.email);
+        params.append('businessName', formData.businessName);
+        params.append('businessType', formData.businessType);
+        params.append('fundingRequired', formData.fundingRequired);
+        params.append('serviceInterested', formData.serviceInterested);
+        params.append('message', formData.message);
+        params.append('timestamp', formData.timestamp);
+        params.append('source', formData.source);
+        
+        fetch(googleSheetsUrl + '?' + params.toString(), {
+            method: 'GET',
+            mode: 'no-cors'
+        })
+        .then(function() {
+            console.log('Contact form submission sent to Google Sheets');
+            
+            // Track with Facebook Pixel
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Contact', {
+                    content_name: 'Contact Form',
+                    content_category: 'Inquiry'
+                });
+            }
+            
+            // Show success message
+            $('#contactFormSuccess').removeClass('d-none');
+            $('#contactForm')[0].reset();
+            
+            // Re-enable submit button
+            $submitBtn.prop('disabled', false).html(originalBtnText);
+            
+            // Hide success message after 10 seconds
+            setTimeout(function() {
+                $('#contactFormSuccess').addClass('d-none');
+            }, 10000);
+        })
+        .catch(function(error) {
+            console.error('Contact form submission error:', error);
+            
+            // Show error message
+            $('#contactFormError').removeClass('d-none');
+            
+            // Re-enable submit button
+            $submitBtn.prop('disabled', false).html(originalBtnText);
+            
+            // Hide error after 5 seconds
+            setTimeout(function() {
+                $('#contactFormError').addClass('d-none');
+            }, 5000);
+        });
+    }
+
 })(jQuery);
+
+
+
 
 
 

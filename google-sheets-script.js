@@ -42,11 +42,11 @@ function doPost(e) {
       data.referenceId || generateReferenceId()
     ];
     
-    // Append the row to the sheet
-    sheet.appendRow(rowData);
+  // Append the row to the sheet
+  sheet.appendRow(rowData);
     
-    // Format the new row
-    var lastRow = sheet.getLastRow();
+  // Format the new row
+  var lastRow = sheet.getLastRow();
     
     // Apply formatting
     sheet.getRange(lastRow, 1).setNumberFormat('yyyy-MM-dd HH:mm:ss'); // Timestamp
@@ -64,9 +64,26 @@ function doPost(e) {
     // Auto-resize columns
     sheet.autoResizeColumns(1, 12);
     
-    // Send notification email to admin (optional)
-    if (data.email) {
-      sendAdminNotification(data, rowData[11]); // Pass reference ID
+    // Build a record from the actual sheet values to ensure accuracy
+    var values = sheet.getRange(lastRow, 1, 1, 12).getValues()[0];
+    var record = {
+      timestamp: values[0],
+      fullName: values[1],
+      mobile: values[2],
+      email: values[3],
+      businessName: values[4],
+      businessType: values[5],
+      fundingRequired: values[6],
+      serviceInterested: values[7],
+      message: values[8],
+      ipAddress: values[9],
+      userAgent: values[10],
+      referenceId: values[11]
+    };
+    
+    // Send notification email to admin and auto-reply to user
+    if (record.email) {
+      sendAdminNotification(record, record.referenceId);
     }
     
     // Return success response
@@ -128,11 +145,11 @@ function doGet(e) {
         referenceId
       ];
       
-      // Append the row to the sheet
-      sheet.appendRow(rowData);
+  // Append the row to the sheet
+  sheet.appendRow(rowData);
       
-      // Format the new row
-      var lastRow = sheet.getLastRow();
+  // Format the new row
+  var lastRow = sheet.getLastRow();
       
       // Apply color coding based on funding amount
       var fundingCell = sheet.getRange(lastRow, 7); // Column G (Funding Required)
@@ -142,8 +159,25 @@ function doGet(e) {
         sheet.getRange(lastRow, 1, 1, 12).setBackground('#fff3cd'); // Yellow for medium value
       }
       
-      // Send email notification
-      sendAdminNotification(data, referenceId);
+      // Build a record from the actual sheet values to ensure accuracy
+      var values = sheet.getRange(lastRow, 1, 1, 12).getValues()[0];
+      var record = {
+        timestamp: values[0],
+        fullName: values[1],
+        mobile: values[2],
+        email: values[3],
+        businessName: values[4],
+        businessType: values[5],
+        fundingRequired: values[6],
+        serviceInterested: values[7],
+        message: values[8],
+        ipAddress: values[9],
+        userAgent: values[10],
+        referenceId: values[11]
+      };
+
+      // Send email notification and auto-reply using the exact sheet data
+      sendAdminNotification(record, record.referenceId);
       
       // Return success response
       return ContentService.createTextOutput(JSON.stringify({
@@ -259,10 +293,123 @@ function sendAdminNotification(data, referenceId) {
       htmlBody: htmlBody
     });
     
+     // Send auto-reply to customer (use the same sheet-sourced data)
+     sendAutoReply(data, referenceId);
+   
   } catch (error) {
     Logger.log('Email notification failed: ' + error.toString());
   }
 }
+
+  /**
+   * Send auto-reply email to customer
+   */
+  function sendAutoReply(data, referenceId) {
+    try {
+      var recipient = data.email;
+      var subject = 'Thank You for Contacting Agnivridhi India - Ref: ' + referenceId;
+      var submittedAt = data.timestamp ? Utilities.formatDate(new Date(data.timestamp), Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm') : Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm');
+    
+      var htmlBody = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #0891b2 0%, #155e75 100%); color: white; padding: 30px; border-radius: 5px 5px 0 0; text-align: center;">
+            <h1 style="margin: 0; font-size: 28px;">🙏 Thank You!</h1>
+            <p style="margin: 10px 0 0 0; font-size: 16px;">We've received your inquiry</p>
+          </div>
+        
+          <div style="background: white; padding: 30px; border: 1px solid #ddd;">
+            <p style="font-size: 16px; color: #333; margin-top: 0;">Dear <strong>\${escapeHtml(data.fullName)}</strong>,</p>
+          
+            <p style="font-size: 15px; color: #555; line-height: 1.6;">
+              Thank you for reaching out to <strong>Agnivridhi India</strong>. We have successfully received your inquiry and our team will review it shortly.
+            </p>
+          
+            <div style="background: #f0f9ff; padding: 15px; border-left: 4px solid #0891b2; margin: 20px 0;">
+              <p style="margin: 0; color: #0891b2;"><strong>📋 Your Reference ID:</strong></p>
+              <p style="margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #155e75;">\${referenceId}</p>
+              <p style="margin: 5px 0 0 0; font-size: 13px; color: #666;"><em>Please save this for future reference</em></p>
+            </div>
+
+          <div style="background: #f9fafb; padding: 15px; border-radius: 6px; border: 1px solid #e5e7eb; margin: 20px 0;">
+            <h3 style="color: #0891b2; margin: 0 0 10px 0; font-size: 16px;">📝 Your Submitted Details</h3>
+            <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 6px 10px; color: #666; width: 45%;">Submitted At</td>
+                <td style="padding: 6px 10px; color: #111;">\${submittedAt}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 10px; color: #666;">Full Name</td>
+                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.fullName)}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 10px; color: #666;">Email</td>
+                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.email)}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 10px; color: #666;">Mobile</td>
+                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.mobile)}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 10px; color: #666;">Business / Project</td>
+                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.businessName)}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 10px; color: #666;">Business Type</td>
+                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.businessType)}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 10px; color: #666;">Service / Subject</td>
+                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.serviceInterested)}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 10px; color: #666;">Funding Required</td>
+                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.fundingRequired)}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 10px; color: #666; vertical-align: top;">Message</td>
+                <td style="padding: 6px 10px; color: #111; white-space: pre-wrap;">\${escapeHtml(data.message)}</td>
+              </tr>
+            </table>
+          </div>
+          
+            <div style="text-align: center; margin: 30px 0;">
+              <p style="color: #666; margin-bottom: 15px;">Need immediate assistance?</p>
+              <a href="tel:+919289555190" style="display: inline-block; background: #0891b2; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold;">📞 Call Us: +91 9289555190</a>
+            </div>
+          </div>
+        
+          <div style="text-align: center; padding: 20px; color: #999; font-size: 12px;">
+            <p>This is an automated email. Please do not reply.</p>
+            <p>© 2025 Agnivridhi India. All rights reserved.</p>
+          </div>
+        </div>
+      `;
+    
+      MailApp.sendEmail({
+        to: recipient,
+        replyTo: 'noreply@agnivridhiindia.com',
+        subject: subject,
+        htmlBody: htmlBody,
+        name: 'Agnivridhi India'
+      });
+    
+    } catch (error) {
+      Logger.log('Auto-reply failed: ' + error.toString());
+    }
+  }
+
+  /**
+   * Escape HTML special characters to avoid HTML injection
+   */
+  function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
 
 /**
  * Create initial sheet setup (run this once manually)
