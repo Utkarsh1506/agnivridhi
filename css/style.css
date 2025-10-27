@@ -962,7 +962,7 @@ html[data-theme="light"] .btn.btn-light {
 }
 
 .testimonial-hero-carousel .owl-stage-outer {
-    overflow: hidden !important;
+    overflow: visible !important;
 }
 
 .testimonial-hero-carousel .owl-stage-outer::-webkit-scrollbar {
@@ -983,25 +983,14 @@ html[data-theme="light"] .btn.btn-light {
     position: relative;
 }
 
-/* Center card popup effect */
+/* Center focus: scale and bring to front */
 .testimonial-hero-carousel .owl-item.center .testimonial-hero-item {
-    transform: scale(1.05);
+    transform: none;
     opacity: 1;
     z-index: 10;
-    box-shadow: 0 16px 48px rgba(8, 145, 178, 0.25);
 }
 
-/* Add extra margin to prevent overlap */
-.testimonial-hero-carousel .owl-item {
-    padding: 30px 15px;
-}
-
-.testimonial-hero-carousel .owl-stage-outer {
-    padding: 30px 0;
-    overflow: visible;
-}
-
-/* Remove variable card sizes - all cards same size now */
+/* Card sizes - all cards same size */
 .testimonial-hero-carousel .testimonial-compact,
 .testimonial-hero-carousel .testimonial-medium,
 .testimonial-hero-carousel .testimonial-large {
@@ -2063,8 +2052,6 @@ html[data-theme="light"] .btn.btn-light {
 
 
 
- 
- 
 /* ============================= */
 /* Consultation Modal Styles */
 /* ============================= */
@@ -2190,7 +2177,7 @@ html[data-theme="light"] .btn.btn-light {
 /* Center card - front and scaled up */
 .testimonial-hero-carousel .owl-item.center {
     opacity: 1;
-    transform: scale(1.15) rotateY(0deg) translateY(-30px) translateZ(50px);
+    transform: scale(1.05) rotateY(0deg) translateY(-30px) translateZ(50px);
     z-index: 10;
 }
 
@@ -2272,13 +2259,16 @@ html[data-theme="light"] .btn.btn-light {
     }
     
     .testimonial-hero-carousel .owl-item.center {
-        transform: scale(1.08) translateY(-15px);
+        transform: scale(1.05) translateY(-15px);
     }
     
     .testimonial-hero-carousel .owl-dots {
         margin-top: 35px;
     }
 }
+/* Position owl nav container (fix orphaned properties) */
+.testimonial-hero-carousel .owl-nav {
+    position: absolute;
     top: 50%;
     width: 100%;
     transform: translateY(-50%);
@@ -2345,7 +2335,7 @@ html[data-theme="light"] .btn.btn-light {
     }
     
     .testimonial-hero-carousel .owl-item.center {
-        transform: scale(1.1) translateY(-10px);
+        transform: scale(1.05) translateY(-10px);
     }
     
     .testimonial-hero-carousel .owl-nav button {
@@ -2354,8 +2344,7 @@ html[data-theme="light"] .btn.btn-light {
         font-size: 18px !important;
     }
 }
-    border-color: #0891b2;
-}
+
 
 #consultationModal textarea.form-control {
     resize: vertical;

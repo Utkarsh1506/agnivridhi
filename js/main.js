@@ -31,7 +31,8 @@
         autoplay: true,
         autoplayTimeout: 3000,
         autoplayHoverPause: false,
-        smartSpeed: 800,
+        smartSpeed: 1000,
+        fluidSpeed: 1000,
         center: true,
         dots: true,
         loop: true,
@@ -42,27 +43,44 @@
         mouseDrag: true,
         touchDrag: true,
         pullDrag: true,
+        freeDrag: false,
+        slideBy: 1,
+        slideTransition: 'ease',
+        autoplaySpeed: 1000,
+        navSpeed: 1000,
+        dotsSpeed: 1000,
+        dragEndSpeed: 1000,
         responsiveClass: true,
         responsive: {
             0:{
                 items: 1,
-                margin: 15
+                margin: 15,
+                loop: true,
+                center: true
             },
             576:{
                 items: 1,
-                margin: 20
+                margin: 20,
+                loop: true,
+                center: true
             },
             768:{
                 items: 3,
-                margin: 25
+                margin: 25,
+                loop: true,
+                center: true
             },
             992:{
                 items: 3,
-                margin: 30
+                margin: 30,
+                loop: true,
+                center: true
             },
             1200:{
                 items: 3,
-                margin: 30
+                margin: 30,
+                loop: true,
+                center: true
             }
         }
     });
