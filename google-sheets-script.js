@@ -3,43 +3,39 @@ function doPost(e) {
     // Get the active spreadsheet
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     
-    // Determine content type and parse accordingly
-    var ct = (e && e.postData && e.postData.type) ? e.postData.type : '';
-    var data = {};
-    var screenshotUrl = '';
+    // Generate reference ID
     var referenceId = generateReferenceId();
     
-    if (ct.indexOf('application/json') > -1) {
-      data = JSON.parse(e.postData.contents || '{}');
-    } else if (ct.indexOf('multipart/form-data') > -1) {
-      // Collect fields from parameters
-      var p = e.parameter || {};
-      data = {
-        fullName: p.fullName || '',
-        mobile: p.mobile || '',
-        email: p.email || '',
-        businessName: p.businessName || 'Not Provided',
-        businessType: p.businessType || '',
-        fundingRequired: p.fundingRequired || '',
-        serviceInterested: p.serviceInterested || '',
-        preferredDate: p.preferredDate || '',
-        preferredTime: p.preferredTime || '',
-        consultWith: p.consultWith || '',
-        transactionId: p.transactionId || 'N/A',
-        upiId: p.upiId || 'N/A',
-        paymentDate: p.paymentDate || 'N/A',
-        paymentTime: p.paymentTime || 'N/A',
-        message: p.message || 'No additional details',
-        ipAddress: p.ipAddress || 'Unknown',
-        userAgent: p.userAgent || 'Unknown',
-        referenceId: referenceId
-      };
-      // Handle file upload if present
-      screenshotUrl = uploadPaymentScreenshot_(e.files, referenceId);
-    } else {
-      // Fallback: try JSON parse
-      data = JSON.parse((e && e.postData && e.postData.contents) || '{}');
-    }
+    Logger.log('=== doPost called ===');
+    Logger.log('e.parameter keys: ' + (e && e.parameter ? Object.keys(e.parameter).join(', ') : 'none'));
+
+    // Build data object from parameters
+    var p = e.parameter || {};
+    var data = {
+      fullName: p.fullName || '',
+      mobile: p.mobile || '',
+      email: p.email || '',
+      businessName: p.businessName || 'Not Provided',
+      businessType: p.businessType || '',
+      fundingRequired: p.fundingRequired || '',
+      serviceInterested: p.serviceInterested || '',
+      preferredDate: p.preferredDate || '',
+      preferredTime: p.preferredTime || '',
+      consultWith: p.consultWith || '',
+      transactionId: p.transactionId || 'N/A',
+      upiId: p.upiId || 'N/A',
+      paymentDate: p.paymentDate || 'N/A',
+      paymentTime: p.paymentTime || 'N/A',
+      message: p.message || 'No additional details',
+      ipAddress: p.ipAddress || 'Unknown',
+      userAgent: p.userAgent || 'Unknown',
+      referenceId: referenceId
+    };
+    
+    Logger.log('=== Data to be written ===');
+    Logger.log('fullName: ' + data.fullName);
+    Logger.log('email: ' + data.email);
+    Logger.log('mobile: ' + data.mobile);
     
     // Prepare row data
     var rowData = [
@@ -58,7 +54,7 @@ function doPost(e) {
       data.upiId || 'N/A',
       data.paymentDate || 'N/A',
       data.paymentTime || 'N/A',
-      (screenshotUrl || data.paymentScreenshotUrl || ''),
+      '', // Payment Screenshot URL (removed)
       data.message || 'No additional details',
       data.ipAddress || 'Unknown',
       data.userAgent || 'Unknown',
@@ -109,7 +105,6 @@ function doPost(e) {
       upiId: values[12],
       paymentDate: values[13],
       paymentTime: values[14],
-      paymentScreenshotUrl: values[15],
       message: values[16],
       ipAddress: values[17],
       userAgent: values[18],
@@ -195,8 +190,8 @@ function doGet(e) {
         data.upiId,
         data.paymentDate,
         data.paymentTime,
-        '', // Payment Screenshot URL (empty for GET requests)
-        data.message,
+      (e.parameter.paymentScreenshotUrl || ''), // Payment Screenshot URL (legacy field, kept for compatibility)
+      data.message,
         data.ipAddress,
         data.userAgent,
         referenceId
@@ -238,7 +233,6 @@ function doGet(e) {
         upiId: values[12],
         paymentDate: values[13],
         paymentTime: values[14],
-        paymentScreenshotUrl: values[15],
         message: values[16],
         ipAddress: values[17],
         userAgent: values[18],
@@ -280,45 +274,6 @@ function generateReferenceId() {
   var date = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyyMMdd');
   var random = Math.random().toString(36).substring(2, 8).toUpperCase();
   return 'AGNI-' + date + '-' + random;
-}
-
-/**
- * Upload payment screenshot to Drive and return a sharable URL
- */
-function uploadPaymentScreenshot_(files, referenceId) {
-  try {
-    if (!files) return '';
-    // Try to find a file field named 'paymentScreenshot' or take the first file
-    var fileKey = null;
-    for (var k in files) { fileKey = k; if (k === 'paymentScreenshot') break; }
-    if (!fileKey) return '';
-    var f = files[fileKey];
-    if (!f || !f.contents) return '';
-
-    var folder = getOrCreateFolder_('Agnivridhi Payments');
-    var now = new Date();
-    var ym = Utilities.formatDate(now, Session.getScriptTimeZone(), 'yyyy-MM');
-    var subFolder = getOrCreateSubFolder_(folder, ym);
-    var safeName = (f.filename || ('payment_' + referenceId + '.bin'));
-    var blob = Utilities.newBlob(f.contents, f.mimeType || 'application/octet-stream', safeName);
-    var file = subFolder.createFile(blob);
-    // Make link-viewable
-    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-    return file.getUrl();
-  } catch (err) {
-    Logger.log('uploadPaymentScreenshot_ failed: ' + err);
-    return '';
-  }
-}
-
-function getOrCreateFolder_(name) {
-  var it = DriveApp.getFoldersByName(name);
-  return it.hasNext() ? it.next() : DriveApp.createFolder(name);
-}
-
-function getOrCreateSubFolder_(parent, name) {
-  var it = parent.getFoldersByName(name);
-  return it.hasNext() ? it.next() : parent.createFolder(name);
 }
 
 /**
@@ -414,7 +369,8 @@ function sendAdminNotification(data, referenceId) {
             ${paymentDetails}
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">Payment Screenshot:</strong></td>
-              <td style="padding: 8px; border-bottom: 1px solid #ddd;">${data.paymentScreenshotUrl ? ('<a href="' + data.paymentScreenshotUrl + '" target="_blank">View Screenshot</a>') : '—'}</td>
+              <td style="padding: 8px; border-bottom: 1px solid #ddd;">            </tr>
+          </table></td>
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">Payment Screenshot:</strong></td>
@@ -484,7 +440,9 @@ function sendAdminNotification(data, referenceId) {
             <td style="padding: 6px 10px; color: #666;">Payment Date & Time</td>
             <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.paymentDate)} at \${escapeHtml(data.paymentTime)}</td>
           </tr>
-          ${data.paymentScreenshotUrl ? '<tr><td style="padding: 6px 10px; color: #666;">Payment Screenshot</td><td style="padding: 6px 10px; color: #111;"><a href="' + data.paymentScreenshotUrl + '" target="_blank">View Screenshot</a></td></tr>' : ''}
+                        </tr>
+              ${paymentInfo}
+              <tr>
         `;
       }
       

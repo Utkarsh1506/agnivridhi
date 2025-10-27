@@ -1,5 +1,6 @@
-// Centralized configuration for Agnivridhi site
-// Update this single value when your Apps Script Web App URL changes
+// Deprecated: config.js is no longer used. URL is hardcoded in js/main.js.
+// This file remains only to avoid confusion if referenced accidentally.
+// If you re-enable it, ensure HTML includes <script src="js/config.js"></script> before main.js.
 (function(){
-  window.AGNI_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzoZ4xX4i4zg1_3x1VbhsU7CQ3ayZmgAnehf_cFMip2J2bxCctIqXAFYBUYvc94ogrV/exec';
+  window.AGNI_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxI0HgjNDeWgfmoQwXHvZG94459PQ5SOuoD_xDYSgXjutTcLKclDUPcgn1krdZ3xGJI/exec';
 })();

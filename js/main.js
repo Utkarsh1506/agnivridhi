@@ -205,7 +205,8 @@
             $('#paymentFields').slideDown();
             
             // Set required attribute for payment fields
-            $('#transactionId, #upiId, #paymentDate, #paymentTime, #paymentScreenshot').prop('required', true);
+            $('#transactionId, #upiId, #paymentDate, #paymentTime').prop('required', true);
+            // Screenshot is optional now
             
             // Display appropriate QR code
             var qrHtml = '<img src="img/qr-' + price + '.png" alt="Payment QR Code" class="img-fluid" style="max-width: 200px;">';
@@ -218,13 +219,12 @@
             $('#paymentFields').slideUp();
             
             // Remove required attribute for payment fields
-            $('#transactionId, #upiId, #paymentDate, #paymentTime, #paymentScreenshot').prop('required', false);
+            $('#transactionId, #upiId, #paymentDate, #paymentTime').prop('required', false);
             // Clear values including file input
             $('#transactionId').val('');
             $('#upiId').val('');
             $('#paymentDate').val('');
             $('#paymentTime').val('');
-            $('#paymentScreenshot').val('');
             
             $('#qrCodeContainer').html('');
         }
@@ -277,18 +277,35 @@
         
         // Execute reCAPTCHA v3 (invisible)
         if (typeof grecaptcha !== 'undefined') {
-            grecaptcha.ready(function() {
-                grecaptcha.execute('6LePnfYrAAAAADeuSp1IJtJ_fyCSsEB9y-BVCoqz', {action: 'consultation'})
-                .then(function(token) {
-                    console.log('✅ reCAPTCHA token received:', token ? 'Valid' : 'Null');
-                    submitConsultationForm(token, $submitBtn, originalBtnText);
+            Promise.resolve()
+                .then(function() {
+                    return new Promise(function(resolve, reject) {
+                        grecaptcha.ready(function() {
+                            try {
+                                grecaptcha.execute('6LePnfYrAAAAADeuSp1IJtJ_fyCSsEB9y-BVCoqz', {action: 'consultation'})
+                                    .then(function(token) {
+                                        console.log('✅ reCAPTCHA token received:', token ? 'Valid' : 'Null');
+                                        submitConsultationForm(token, $submitBtn, originalBtnText);
+                                        resolve();
+                                    })
+                                    .catch(function(error) {
+                                        console.error('❌ reCAPTCHA error:', error);
+                                        console.log('⚠️ Submitting without reCAPTCHA due to error');
+                                        submitConsultationForm(null, $submitBtn, originalBtnText);
+                                        resolve();
+                                    });
+                            } catch (err) {
+                                console.error('❌ reCAPTCHA execute error:', err);
+                                submitConsultationForm(null, $submitBtn, originalBtnText);
+                                resolve();
+                            }
+                        });
+                    });
                 })
-                .catch(function(error) {
-                    console.error('❌ reCAPTCHA error:', error);
-                    console.log('⚠️ Submitting without reCAPTCHA due to error');
+                .catch(function(err) {
+                    console.error('❌ reCAPTCHA outer promise error:', err);
                     submitConsultationForm(null, $submitBtn, originalBtnText);
                 });
-            });
         } else {
             // If reCAPTCHA not loaded, submit without it
             console.log('⚠️ reCAPTCHA not loaded, submitting without it');
@@ -297,24 +314,39 @@
     });
     
     function submitConsultationForm(recaptchaToken, $submitBtn, originalBtnText) {
-        // Get form data
+        // Get form data - capture values immediately before any async operations
+        var fullNameVal = $('#fullName').val();
+        var mobileVal = $('#mobile').val();
+        var emailVal = $('#email').val();
+        var businessNameVal = $('#businessName').val() || 'Not Provided';
+        var businessTypeVal = $('#businessType').val();
+        var fundingRequiredVal = $('#fundingRequired').val();
+        var serviceInterestedVal = $('#serviceInterested').val();
+        var preferredDateVal = $('#preferredDate').val();
+        var preferredTimeVal = $('#preferredTime').val();
+        var consultWithVal = $('#consultWith').val();
+        var transactionIdVal = $('#transactionId').val() || 'N/A';
+        var upiIdVal = $('#upiId').val() || 'N/A';
+        var paymentDateVal = $('#paymentDate').val() || 'N/A';
+        var paymentTimeVal = $('#paymentTime').val() || 'N/A';
+        var messageVal = $('#message').val() || 'No additional details provided';
+        
         var formData = {
-            fullName: $('#fullName').val(),
-            mobile: $('#mobile').val(),
-            email: $('#email').val(),
-            businessName: $('#businessName').val() || 'Not Provided',
-            businessType: $('#businessType').val(),
-            fundingRequired: $('#fundingRequired').val(),
-            serviceInterested: $('#serviceInterested').val(),
-            preferredDate: $('#preferredDate').val(),
-            preferredTime: $('#preferredTime').val(),
-            consultWith: $('#consultWith').val(),
-            transactionId: $('#transactionId').val() || 'N/A',
-            upiId: $('#upiId').val() || 'N/A',
-            paymentDate: $('#paymentDate').val() || 'N/A',
-            paymentTime: $('#paymentTime').val() || 'N/A',
-            hasPaymentScreenshot: ($('#paymentScreenshot').length && $('#paymentScreenshot')[0].files && $('#paymentScreenshot')[0].files.length > 0) ? 'Yes' : 'No',
-            message: $('#message').val() || 'No additional details provided',
+            fullName: fullNameVal,
+            mobile: mobileVal,
+            email: emailVal,
+            businessName: businessNameVal,
+            businessType: businessTypeVal,
+            fundingRequired: fundingRequiredVal,
+            serviceInterested: serviceInterestedVal,
+            preferredDate: preferredDateVal,
+            preferredTime: preferredTimeVal,
+            consultWith: consultWithVal,
+            transactionId: transactionIdVal,
+            upiId: upiIdVal,
+            paymentDate: paymentDateVal,
+            paymentTime: paymentTimeVal,
+            message: messageVal,
             recaptchaToken: recaptchaToken,
             timestamp: new Date().toISOString(),
             source: window.location.href
@@ -324,6 +356,12 @@
         console.log('📋 Consultation Form Data:', formData);
         console.log('📧 Email field value:', formData.email);
         console.log('📱 Mobile field value:', formData.mobile);
+        console.log('💳 Payment fields:', {
+            transactionId: formData.transactionId,
+            upiId: formData.upiId,
+            paymentDate: formData.paymentDate,
+            paymentTime: formData.paymentTime
+        });
         
         // Track with Google Analytics (GA4)
         if (typeof gtag !== 'undefined') {
@@ -340,88 +378,34 @@
             ga('send', 'event', 'Consultation Form', 'Submit', formData.serviceInterested);
         }
         
-        // Decide transport: POST multipart if a screenshot is attached, else fallback to GET
-        var googleSheetsUrl = (window.AGNI_SHEETS_URL || 'https://script.google.com/macros/s/AKfycbzoZ4xX4i4zg1_3x1VbhsU7CQ3ayZmgAnehf_cFMip2J2bxCctIqXAFYBUYvc94ogrV/exec');
-
-        var hasFile = ($('#paymentScreenshot').length && $('#paymentScreenshot')[0].files && $('#paymentScreenshot')[0].files.length > 0);
-        var fetchPromise;
-        if (hasFile) {
-            // Optional client-side validation: max 5MB, image types only
-            var file = $('#paymentScreenshot')[0].files[0];
-            var maxBytes = 5 * 1024 * 1024; // 5 MB
-            if (file.size > maxBytes) {
-                $('#formSuccess')
-                    .removeClass('alert-success')
-                    .addClass('alert-danger')
-                    .html('<i class="fas fa-exclamation-circle me-2"></i>Screenshot is too large. Please upload an image under 5 MB.')
-                    .removeClass('d-none');
-                $submitBtn.prop('disabled', false).html(originalBtnText);
-                return;
-            }
-            if (!/^image\//.test(file.type)) {
-                $('#formSuccess')
-                    .removeClass('alert-success')
-                    .addClass('alert-danger')
-                    .html('<i class="fas fa-exclamation-circle me-2"></i>Please upload an image file (JPG, PNG, etc.).')
-                    .removeClass('d-none');
-                $submitBtn.prop('disabled', false).html(originalBtnText);
-                return;
-            }
-
-            var fd = new FormData();
-            fd.append('fullName', formData.fullName);
-            fd.append('mobile', formData.mobile);
-            fd.append('email', formData.email);
-            fd.append('businessName', formData.businessName);
-            fd.append('businessType', formData.businessType);
-            fd.append('fundingRequired', formData.fundingRequired);
-            fd.append('serviceInterested', formData.serviceInterested);
-            fd.append('preferredDate', formData.preferredDate);
-            fd.append('preferredTime', formData.preferredTime);
-            fd.append('consultWith', formData.consultWith);
-            fd.append('transactionId', formData.transactionId);
-            fd.append('upiId', formData.upiId);
-            fd.append('paymentDate', formData.paymentDate);
-            fd.append('paymentTime', formData.paymentTime);
-            fd.append('message', formData.message);
-            fd.append('recaptchaToken', formData.recaptchaToken || '');
-            fd.append('timestamp', formData.timestamp);
-            fd.append('source', formData.source);
-            fd.append('paymentScreenshot', file, file.name);
-
-            fetchPromise = fetch(googleSheetsUrl, { method: 'POST', mode: 'no-cors', body: fd });
-        } else {
-            // GET fallback (no file path)
-            var params = new URLSearchParams();
-            params.append('fullName', formData.fullName);
-            params.append('mobile', formData.mobile);
-            params.append('email', formData.email);
-            params.append('businessName', formData.businessName);
-            params.append('businessType', formData.businessType);
-            params.append('fundingRequired', formData.fundingRequired);
-            params.append('serviceInterested', formData.serviceInterested);
-            params.append('preferredDate', formData.preferredDate);
-            params.append('preferredTime', formData.preferredTime);
-            params.append('consultWith', formData.consultWith);
-            params.append('transactionId', formData.transactionId);
-            params.append('upiId', formData.upiId);
-            params.append('paymentDate', formData.paymentDate);
-            params.append('paymentTime', formData.paymentTime);
-            params.append('message', formData.message);
-            params.append('hasPaymentScreenshot', formData.hasPaymentScreenshot);
-            params.append('timestamp', formData.timestamp);
-            if (formData.recaptchaToken) { params.append('recaptchaToken', formData.recaptchaToken); }
-            params.append('source', formData.source);
-            
-            var finalUrl = googleSheetsUrl + '?' + params.toString();
-            console.log('🌐 Sending GET request to:', googleSheetsUrl);
-            console.log('📊 Query params length:', params.toString().length);
-            console.log('📦 Full URL length:', finalUrl.length);
-            
-            fetchPromise = fetch(finalUrl, { method: 'GET', mode: 'no-cors' });
-        }
-
-        fetchPromise
+        // Use GET with query params - simple and works with no-cors
+        var googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxI0HgjNDeWgfmoQwXHvZG94459PQ5SOuoD_xDYSgXjutTcLKclDUPcgn1krdZ3xGJI/exec';
+        
+        var params = new URLSearchParams();
+        params.append('fullName', formData.fullName);
+        params.append('mobile', formData.mobile);
+        params.append('email', formData.email);
+        params.append('businessName', formData.businessName);
+        params.append('businessType', formData.businessType);
+        params.append('fundingRequired', formData.fundingRequired);
+        params.append('serviceInterested', formData.serviceInterested);
+        params.append('preferredDate', formData.preferredDate);
+        params.append('preferredTime', formData.preferredTime);
+        params.append('consultWith', formData.consultWith);
+        params.append('transactionId', formData.transactionId);
+        params.append('upiId', formData.upiId);
+        params.append('paymentDate', formData.paymentDate);
+        params.append('paymentTime', formData.paymentTime);
+        params.append('message', formData.message);
+        params.append('timestamp', formData.timestamp);
+        if (formData.recaptchaToken) { params.append('recaptchaToken', formData.recaptchaToken); }
+        params.append('source', formData.source);
+        
+        var finalUrl = googleSheetsUrl + '?' + params.toString();
+        console.log('🌐 Sending GET request');
+        console.log('📦 URL length:', finalUrl.length);
+        
+        fetch(finalUrl, { method: 'GET', mode: 'no-cors' })
         .then(function() {
             console.log('✅ Form submission sent to Google Sheets');
             
@@ -445,11 +429,12 @@
             }
             
             // Show success message
-            $('#formSuccess').html(
-                '<i class="fas fa-check-circle me-2"></i>' +
-                '<strong>Thank you!</strong> Your consultation request has been received. ' +
-                'We\'ll contact you within 24 hours.'
-            );
+            var successMessage = '<i class="fas fa-check-circle me-2"></i>' +
+                '<strong>Thank you!</strong> Your consultation request has been received.';
+            
+            successMessage += '<br><small class="text-muted mt-2 d-block">We\'ll contact you within 24 hours.</small>';
+            
+            $('#formSuccess').html(successMessage);
             $('#consultationForm').addClass('d-none');
             $('#formSuccess').removeClass('d-none');
             
@@ -541,7 +526,7 @@
         }
         
         // Send to Google Sheets
-    var googleSheetsUrl = (window.AGNI_SHEETS_URL || 'https://script.google.com/macros/s/AKfycbzoZ4xX4i4zg1_3x1VbhsU7CQ3ayZmgAnehf_cFMip2J2bxCctIqXAFYBUYvc94ogrV/exec');
+        var googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxI0HgjNDeWgfmoQwXHvZG94459PQ5SOuoD_xDYSgXjutTcLKclDUPcgn1krdZ3xGJI/exec';
         
         var params = new URLSearchParams();
         params.append('fullName', formData.fullName);

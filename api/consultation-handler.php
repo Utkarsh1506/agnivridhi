@@ -43,7 +43,7 @@ define('ZOHO_CLIENT_SECRET', 'your_zoho_client_secret_here');
 
 // Google Sheets Integration (Alternative to CRM)
 define('GOOGLE_SHEETS_ENABLED', true); // Set to true when ready
-define('GOOGLE_SHEETS_URL', 'https://script.google.com/macros/s/AKfycbzoZ4xX4i4zg1_3x1VbhsU7CQ3ayZmgAnehf_cFMip2J2bxCctIqXAFYBUYvc94ogrV/exec');
+define('GOOGLE_SHEETS_URL', 'https://script.google.com/macros/s/AKfycbxI0HgjNDeWgfmoQwXHvZG94459PQ5SOuoD_xDYSgXjutTcLKclDUPcgn1krdZ3xGJI/exec');
 
 // reCAPTCHA Configuration
 define('RECAPTCHA_SECRET_KEY', '6LePnfYrAAAAAHjH6VZUR3xuz7zGquuC7NItYY7O');
