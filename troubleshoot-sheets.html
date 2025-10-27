@@ -256,7 +256,18 @@
         </div>
     </div>
 
+    <script src="js/config.js"></script>
     <script>
+        // Prefill the URL if config is provided
+        (function(){
+            try {
+                if (window.AGNI_SHEETS_URL) {
+                    var el = document.getElementById('webAppUrl');
+                    if (el && !el.value) { el.value = window.AGNI_SHEETS_URL; }
+                }
+            } catch(e){}
+        })();
+
         function log(message, type = 'info') {
             const logDiv = document.getElementById('testLog');
             const contentDiv = document.getElementById('logContent');

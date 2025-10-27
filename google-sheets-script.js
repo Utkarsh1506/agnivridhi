@@ -1,30 +1,45 @@
-/**
- * Google Apps Script for Agnivridhi India Consultation Form
- * 
- * SETUP INSTRUCTIONS:
- * 1. Create a new Google Sheet
- * 2. Add these headers in row 1:
- *    A: Timestamp | B: Full Name | C: Mobile | D: Email | E: Business Name
- *    F: Business Type | G: Funding Required | H: Service Interested | I: Message
- *    J: IP Address | K: User Agent | L: Reference ID
- * 
- * 3. Go to Extensions → Apps Script
- * 4. Delete default code and paste this entire script
- * 5. Click "Deploy" → "New deployment"
- * 6. Type: Web app
- * 7. Execute as: Me
- * 8. Who has access: Anyone
- * 9. Click "Deploy" and copy the Web App URL
- * 10. Update this URL in your PHP file (consultation-handler.php)
- */
-
 function doPost(e) {
   try {
     // Get the active spreadsheet
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     
-    // Parse the POST data
-    var data = JSON.parse(e.postData.contents);
+    // Determine content type and parse accordingly
+    var ct = (e && e.postData && e.postData.type) ? e.postData.type : '';
+    var data = {};
+    var screenshotUrl = '';
+    var referenceId = generateReferenceId();
+    
+    if (ct.indexOf('application/json') > -1) {
+      data = JSON.parse(e.postData.contents || '{}');
+    } else if (ct.indexOf('multipart/form-data') > -1) {
+      // Collect fields from parameters
+      var p = e.parameter || {};
+      data = {
+        fullName: p.fullName || '',
+        mobile: p.mobile || '',
+        email: p.email || '',
+        businessName: p.businessName || 'Not Provided',
+        businessType: p.businessType || '',
+        fundingRequired: p.fundingRequired || '',
+        serviceInterested: p.serviceInterested || '',
+        preferredDate: p.preferredDate || '',
+        preferredTime: p.preferredTime || '',
+        consultWith: p.consultWith || '',
+        transactionId: p.transactionId || 'N/A',
+        upiId: p.upiId || 'N/A',
+        paymentDate: p.paymentDate || 'N/A',
+        paymentTime: p.paymentTime || 'N/A',
+        message: p.message || 'No additional details',
+        ipAddress: p.ipAddress || 'Unknown',
+        userAgent: p.userAgent || 'Unknown',
+        referenceId: referenceId
+      };
+      // Handle file upload if present
+      screenshotUrl = uploadPaymentScreenshot_(e.files, referenceId);
+    } else {
+      // Fallback: try JSON parse
+      data = JSON.parse((e && e.postData && e.postData.contents) || '{}');
+    }
     
     // Prepare row data
     var rowData = [
@@ -36,10 +51,18 @@ function doPost(e) {
       data.businessType || '',
       data.fundingRequired || '',
       data.serviceInterested || '',
+      data.preferredDate || '',
+      data.preferredTime || '',
+      data.consultWith || '',
+      data.transactionId || 'N/A',
+      data.upiId || 'N/A',
+      data.paymentDate || 'N/A',
+      data.paymentTime || 'N/A',
+      (screenshotUrl || data.paymentScreenshotUrl || ''),
       data.message || 'No additional details',
       data.ipAddress || 'Unknown',
       data.userAgent || 'Unknown',
-      data.referenceId || generateReferenceId()
+      data.referenceId || referenceId
     ];
     
   // Append the row to the sheet
@@ -51,21 +74,25 @@ function doPost(e) {
     // Apply formatting
     sheet.getRange(lastRow, 1).setNumberFormat('yyyy-MM-dd HH:mm:ss'); // Timestamp
     sheet.getRange(lastRow, 3).setNumberFormat('0'); // Mobile as text
-    sheet.getRange(lastRow, 1, 1, 12).setFontSize(10); // Font size
+  sheet.getRange(lastRow, 1, 1, 20).setFontSize(10); // Font size
     
-    // Color code based on funding range
-    var fundingRange = data.fundingRequired || '';
-    if (fundingRange.includes('Above 1 Crore')) {
-      sheet.getRange(lastRow, 1, 1, 12).setBackground('#d4edda'); // Green for high value
-    } else if (fundingRange.includes('50 Lakhs')) {
-      sheet.getRange(lastRow, 1, 1, 12).setBackground('#fff3cd'); // Yellow for medium
+    // Color code based on consultant type
+    var consultWith = data.consultWith || '';
+    if (consultWith.includes('Branch Manager')) {
+      sheet.getRange(lastRow, 1, 1, 19).setBackground('#d4edda'); // Green for highest tier
+    } else if (consultWith.includes('Senior Manager')) {
+      sheet.getRange(lastRow, 1, 1, 19).setBackground('#cfe2ff'); // Blue for senior
+    } else if (consultWith.includes('Manager')) {
+      sheet.getRange(lastRow, 1, 1, 19).setBackground('#fff3cd'); // Yellow for manager
+    } else {
+      sheet.getRange(lastRow, 1, 1, 19).setBackground('#f8f9fa'); // Light gray for free
     }
     
     // Auto-resize columns
-    sheet.autoResizeColumns(1, 12);
+  sheet.autoResizeColumns(1, 20);
     
     // Build a record from the actual sheet values to ensure accuracy
-    var values = sheet.getRange(lastRow, 1, 1, 12).getValues()[0];
+    var values = sheet.getRange(lastRow, 1, 1, 20).getValues()[0];
     var record = {
       timestamp: values[0],
       fullName: values[1],
@@ -75,10 +102,18 @@ function doPost(e) {
       businessType: values[5],
       fundingRequired: values[6],
       serviceInterested: values[7],
-      message: values[8],
-      ipAddress: values[9],
-      userAgent: values[10],
-      referenceId: values[11]
+      preferredDate: values[8],
+      preferredTime: values[9],
+      consultWith: values[10],
+      transactionId: values[11],
+      upiId: values[12],
+      paymentDate: values[13],
+      paymentTime: values[14],
+      paymentScreenshotUrl: values[15],
+      message: values[16],
+      ipAddress: values[17],
+      userAgent: values[18],
+      referenceId: values[19]
     };
     
     // Send notification email to admin and auto-reply to user
@@ -107,6 +142,13 @@ function doPost(e) {
  * Handle GET requests (for form submissions and testing)
  */
 function doGet(e) {
+  // Log all incoming parameters for debugging
+  try {
+    Logger.log('doGet called with parameters: ' + JSON.stringify(e.parameter));
+  } catch(err) {
+    Logger.log('Could not log parameters: ' + err);
+  }
+  
   // If parameters exist, treat as form submission
   if (e && e.parameter && e.parameter.fullName) {
     try {
@@ -121,6 +163,13 @@ function doGet(e) {
         businessType: e.parameter.businessType || '',
         fundingRequired: e.parameter.fundingRequired || '',
         serviceInterested: e.parameter.serviceInterested || '',
+        preferredDate: e.parameter.preferredDate || '',
+        preferredTime: e.parameter.preferredTime || '',
+        consultWith: e.parameter.consultWith || '',
+        transactionId: e.parameter.transactionId || 'N/A',
+        upiId: e.parameter.upiId || 'N/A',
+        paymentDate: e.parameter.paymentDate || 'N/A',
+        paymentTime: e.parameter.paymentTime || 'N/A',
         message: e.parameter.message || 'No additional details',
         ipAddress: e.parameter.ipAddress || 'Unknown',
         userAgent: e.parameter.userAgent || 'Unknown'
@@ -139,6 +188,14 @@ function doGet(e) {
         data.businessType,
         data.fundingRequired,
         data.serviceInterested,
+        data.preferredDate,
+        data.preferredTime,
+        data.consultWith,
+        data.transactionId,
+        data.upiId,
+        data.paymentDate,
+        data.paymentTime,
+        '', // Payment Screenshot URL (empty for GET requests)
         data.message,
         data.ipAddress,
         data.userAgent,
@@ -151,16 +208,20 @@ function doGet(e) {
   // Format the new row
   var lastRow = sheet.getLastRow();
       
-      // Apply color coding based on funding amount
-      var fundingCell = sheet.getRange(lastRow, 7); // Column G (Funding Required)
-      if (data.fundingRequired.includes('1 Crore')) {
-        sheet.getRange(lastRow, 1, 1, 12).setBackground('#d4edda'); // Green for high value
-      } else if (data.fundingRequired.includes('50')) {
-        sheet.getRange(lastRow, 1, 1, 12).setBackground('#fff3cd'); // Yellow for medium value
+      // Apply color coding based on consultant type
+      var consultWith = data.consultWith || '';
+      if (consultWith.includes('Branch Manager')) {
+        sheet.getRange(lastRow, 1, 1, 20).setBackground('#d4edda'); // Green for highest tier
+      } else if (consultWith.includes('Senior Manager')) {
+        sheet.getRange(lastRow, 1, 1, 20).setBackground('#cfe2ff'); // Blue for senior
+      } else if (consultWith.includes('Manager')) {
+        sheet.getRange(lastRow, 1, 1, 20).setBackground('#fff3cd'); // Yellow for manager
+      } else {
+        sheet.getRange(lastRow, 1, 1, 20).setBackground('#f8f9fa'); // Light gray for free
       }
       
       // Build a record from the actual sheet values to ensure accuracy
-      var values = sheet.getRange(lastRow, 1, 1, 12).getValues()[0];
+      var values = sheet.getRange(lastRow, 1, 1, 20).getValues()[0];
       var record = {
         timestamp: values[0],
         fullName: values[1],
@@ -170,10 +231,18 @@ function doGet(e) {
         businessType: values[5],
         fundingRequired: values[6],
         serviceInterested: values[7],
-        message: values[8],
-        ipAddress: values[9],
-        userAgent: values[10],
-        referenceId: values[11]
+        preferredDate: values[8],
+        preferredTime: values[9],
+        consultWith: values[10],
+        transactionId: values[11],
+        upiId: values[12],
+        paymentDate: values[13],
+        paymentTime: values[14],
+        paymentScreenshotUrl: values[15],
+        message: values[16],
+        ipAddress: values[17],
+        userAgent: values[18],
+        referenceId: values[19]
       };
 
       // Send email notification and auto-reply using the exact sheet data
@@ -214,12 +283,77 @@ function generateReferenceId() {
 }
 
 /**
+ * Upload payment screenshot to Drive and return a sharable URL
+ */
+function uploadPaymentScreenshot_(files, referenceId) {
+  try {
+    if (!files) return '';
+    // Try to find a file field named 'paymentScreenshot' or take the first file
+    var fileKey = null;
+    for (var k in files) { fileKey = k; if (k === 'paymentScreenshot') break; }
+    if (!fileKey) return '';
+    var f = files[fileKey];
+    if (!f || !f.contents) return '';
+
+    var folder = getOrCreateFolder_('Agnivridhi Payments');
+    var now = new Date();
+    var ym = Utilities.formatDate(now, Session.getScriptTimeZone(), 'yyyy-MM');
+    var subFolder = getOrCreateSubFolder_(folder, ym);
+    var safeName = (f.filename || ('payment_' + referenceId + '.bin'));
+    var blob = Utilities.newBlob(f.contents, f.mimeType || 'application/octet-stream', safeName);
+    var file = subFolder.createFile(blob);
+    // Make link-viewable
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    return file.getUrl();
+  } catch (err) {
+    Logger.log('uploadPaymentScreenshot_ failed: ' + err);
+    return '';
+  }
+}
+
+function getOrCreateFolder_(name) {
+  var it = DriveApp.getFoldersByName(name);
+  return it.hasNext() ? it.next() : DriveApp.createFolder(name);
+}
+
+function getOrCreateSubFolder_(parent, name) {
+  var it = parent.getFoldersByName(name);
+  return it.hasNext() ? it.next() : parent.createFolder(name);
+}
+
+/**
  * Send email notification to admin
  */
 function sendAdminNotification(data, referenceId) {
   try {
     var recipient = 'info@agnivridhiindia.com'; // Change to your email
     var subject = '🎯 New Consultation Request - ' + data.fullName;
+    
+    // Determine payment status
+    var isPaid = data.consultWith && !data.consultWith.includes('Free');
+    var paymentDetails = '';
+    
+    if (isPaid) {
+      paymentDetails = `
+        <tr style="background: #fef3c7;">
+          <td colspan="2" style="padding: 10px; border-bottom: 1px solid #ddd;">
+            <strong style="color: #f59e0b;">💳 Payment Details:</strong>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">Transaction ID:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;">${data.transactionId}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">UPI ID:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;">${data.upiId}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">Payment Date:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;">${data.paymentDate} at ${data.paymentTime}</td>
+        </tr>
+      `;
+    }
     
     var htmlBody = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -264,6 +398,27 @@ function sendAdminNotification(data, referenceId) {
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">Service:</strong></td>
               <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>${data.serviceInterested}</strong></td>
+            </tr>
+            <tr style="background: #e0f2fe;">
+              <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">📅 Preferred Date:</strong></td>
+              <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>${data.preferredDate}</strong></td>
+            </tr>
+            <tr style="background: #e0f2fe;">
+              <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">🕐 Preferred Time:</strong></td>
+              <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>${data.preferredTime}</strong></td>
+            </tr>
+            <tr style="background: #dcfce7;">
+              <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">👤 Consult With:</strong></td>
+              <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>${data.consultWith}</strong></td>
+            </tr>
+            ${paymentDetails}
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">Payment Screenshot:</strong></td>
+              <td style="padding: 8px; border-bottom: 1px solid #ddd;">${data.paymentScreenshotUrl ? ('<a href="' + data.paymentScreenshotUrl + '" target="_blank">View Screenshot</a>') : '—'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">Payment Screenshot:</strong></td>
+              <td style="padding: 8px; border-bottom: 1px solid #ddd;">${data.hasPaymentScreenshot || 'No'}</td>
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong style="color: #0891b2;">Message:</strong></td>
@@ -310,6 +465,29 @@ function sendAdminNotification(data, referenceId) {
       var subject = 'Thank You for Contacting Agnivridhi India - Ref: ' + referenceId;
       var submittedAt = data.timestamp ? Utilities.formatDate(new Date(data.timestamp), Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm') : Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm');
     
+      // Build payment info section if applicable
+      var paymentInfo = '';
+      if (data.consultWith && !data.consultWith.includes('Free')) {
+        paymentInfo = `
+          <tr style="background: #fef3c7;">
+            <td colspan="2" style="padding: 10px 10px 5px 10px; color: #f59e0b; font-weight: bold;">💳 Payment Information</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 10px; color: #666;">Transaction ID</td>
+            <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.transactionId)}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 10px; color: #666;">UPI ID</td>
+            <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.upiId)}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 10px; color: #666;">Payment Date & Time</td>
+            <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.paymentDate)} at \${escapeHtml(data.paymentTime)}</td>
+          </tr>
+          ${data.paymentScreenshotUrl ? '<tr><td style="padding: 6px 10px; color: #666;">Payment Screenshot</td><td style="padding: 6px 10px; color: #111;"><a href="' + data.paymentScreenshotUrl + '" target="_blank">View Screenshot</a></td></tr>' : ''}
+        `;
+      }
+      
       var htmlBody = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: linear-gradient(135deg, #0891b2 0%, #155e75 100%); color: white; padding: 30px; border-radius: 5px 5px 0 0; text-align: center;">
@@ -365,6 +543,19 @@ function sendAdminNotification(data, referenceId) {
                 <td style="padding: 6px 10px; color: #666;">Funding Required</td>
                 <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.fundingRequired)}</td>
               </tr>
+              <tr style="background: #e0f2fe;">
+                <td style="padding: 6px 10px; color: #666;">📅 Preferred Date</td>
+                <td style="padding: 6px 10px; color: #111; font-weight: bold;">\${escapeHtml(data.preferredDate)}</td>
+              </tr>
+              <tr style="background: #e0f2fe;">
+                <td style="padding: 6px 10px; color: #666;">🕐 Preferred Time</td>
+                <td style="padding: 6px 10px; color: #111; font-weight: bold;">\${escapeHtml(data.preferredTime)}</td>
+              </tr>
+              <tr style="background: #dcfce7;">
+                <td style="padding: 6px 10px; color: #666;">👤 Consulting With</td>
+                <td style="padding: 6px 10px; color: #111; font-weight: bold;">\${escapeHtml(data.consultWith)}</td>
+              </tr>
+              ${paymentInfo}
               <tr>
                 <td style="padding: 6px 10px; color: #666; vertical-align: top;">Message</td>
                 <td style="padding: 6px 10px; color: #111; white-space: pre-wrap;">\${escapeHtml(data.message)}</td>
@@ -427,6 +618,14 @@ function setupSheet() {
     'Business Type',
     'Funding Required',
     'Service Interested',
+    'Preferred Date',
+    'Preferred Time',
+    'Consult With',
+    'Transaction ID',
+    'UPI ID',
+    'Payment Date',
+  'Payment Time',
+  'Payment Screenshot URL',
     'Message',
     'IP Address',
     'User Agent',
@@ -454,10 +653,18 @@ function setupSheet() {
   sheet.setColumnWidth(6, 120); // Business Type
   sheet.setColumnWidth(7, 150); // Funding
   sheet.setColumnWidth(8, 180); // Service
-  sheet.setColumnWidth(9, 250); // Message
-  sheet.setColumnWidth(10, 120); // IP
-  sheet.setColumnWidth(11, 150); // User Agent
-  sheet.setColumnWidth(12, 150); // Reference ID
+  sheet.setColumnWidth(9, 120); // Preferred Date
+  sheet.setColumnWidth(10, 150); // Preferred Time
+  sheet.setColumnWidth(11, 180); // Consult With
+  sheet.setColumnWidth(12, 150); // Transaction ID
+  sheet.setColumnWidth(13, 150); // UPI ID
+  sheet.setColumnWidth(14, 120); // Payment Date
+  sheet.setColumnWidth(15, 100); // Payment Time
+  sheet.setColumnWidth(16, 220); // Payment Screenshot URL
+  sheet.setColumnWidth(17, 250); // Message
+  sheet.setColumnWidth(18, 120); // IP
+  sheet.setColumnWidth(19, 150); // User Agent
+  sheet.setColumnWidth(20, 150); // Reference ID
   
-  Logger.log('Sheet setup complete!');
+  Logger.log('Sheet setup complete with new fields!');
 }

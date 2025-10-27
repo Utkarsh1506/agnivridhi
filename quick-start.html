@@ -313,6 +313,7 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="js/config.js"></script>
     <script>
         function testWebAppUrl() {
             const url = document.getElementById('webAppUrl').value;
@@ -397,6 +398,14 @@
             });
         }
         
+        // Prefill from config if available
+        (function(){
+            if (window.AGNI_SHEETS_URL) {
+                var el = document.getElementById('webAppUrl');
+                if (el && !el.value) { el.value = window.AGNI_SHEETS_URL; }
+            }
+        })();
+
         function copyUrlToClipboard() {
             const url = document.getElementById('webAppUrl').value;
             if (!url) {

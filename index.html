@@ -1246,7 +1246,7 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 
-    <!-- Consultation Form Modal -->
+    <!-- Consultation Form Modal Start -->
     <div class="modal fade" id="consultationModal" tabindex="-1" aria-labelledby="consultationModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content border-0 shadow-lg">
@@ -1291,8 +1291,8 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="fundingRequired" class="form-label">Funding Required <span class="text-danger">*</span></label>
-                                <select class="form-select" id="fundingRequired" name="fundingRequired" required>
+                                <label for="fundingRequired" class="form-label">Funding Required</label>
+                                <select class="form-select" id="fundingRequired" name="fundingRequired">
                                     <option value="">Select range</option>
                                     <option value="Below 10 Lakhs">Below ₹10 Lakhs</option>
                                     <option value="10-25 Lakhs">₹10-25 Lakhs</option>
@@ -1313,9 +1313,79 @@
                                     <option value="Business Expansion">Business Expansion</option>
                                     <option value="ISO Certification">ISO Certification</option>
                                     <option value="MSME Registration">MSME Registration</option>
+                                    <option value="Certification Service">Certification Service</option>
+                                    <option value="Business Registration">Business Registration</option>
+                                    <option value="Grants">Grants</option>
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
+                            <div class="col-md-6">
+                                <label for="preferredDate" class="form-label">Preferred Consultation Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="preferredDate" name="preferredDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="preferredTime" class="form-label">Preferred Time Slot <span class="text-danger">*</span></label>
+                                <select class="form-select" id="preferredTime" name="preferredTime" required>
+                                    <option value="">Select time slot</option>
+                                    <option value="10:30 AM - 11:30 AM">10:30 AM - 11:30 AM</option>
+                                    <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM</option>
+                                    <option value="12:30 PM - 1:30 PM">12:30 PM - 1:30 PM</option>
+                                    <option value="1:30 PM - 2:30 PM">1:30 PM - 2:30 PM</option>
+                                    <option value="2:30 PM - 3:30 PM">2:30 PM - 3:30 PM</option>
+                                    <option value="3:30 PM - 4:30 PM">3:30 PM - 4:30 PM</option>
+                                    <option value="4:30 PM - 5:30 PM">4:30 PM - 5:30 PM</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="consultWith" class="form-label">Consult With <span class="text-danger">*</span></label>
+                                <select class="form-select" id="consultWith" name="consultWith" required>
+                                    <option value="">Select consultant</option>
+                                    <option value="Sales Team - Free" data-price="0">Sales Team - Free</option>
+                                    <option value="Manager - ₹99" data-price="99">Manager - ₹99</option>
+                                    <option value="Senior Manager - ₹199" data-price="199">Senior Manager - ₹199</option>
+                                    <option value="Branch Manager - ₹299" data-price="299">Branch Manager - ₹299</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Payment QR Section (Hidden by default) -->
+                            <div class="col-12" id="paymentSection" style="display: none;">
+                                <div class="card border-primary">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-title text-primary">Complete Payment</h6>
+                                        <p class="small text-muted mb-3">Scan the QR code below to make payment</p>
+                                        <div id="qrCodeContainer" class="mb-3">
+                                            <!-- QR code will be displayed here -->
+                                        </div>
+                                        <p class="small text-muted">After payment, please fill in the details below</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Payment Details Fields (Hidden by default) -->
+                            <div id="paymentFields" style="display: none;">
+                                <div class="col-md-6">
+                                    <label for="transactionId" class="form-label">Transaction ID / UTR No. <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="transactionId" name="transactionId" placeholder="Enter transaction ID">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="upiId" class="form-label">Your UPI ID <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="upiId" name="upiId" placeholder="yourname@upi">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="paymentDate" class="form-label">Payment Date <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="paymentDate" name="paymentDate">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="paymentTime" class="form-label">Payment Time <span class="text-danger">*</span></label>
+                                    <input type="time" class="form-control" id="paymentTime" name="paymentTime">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot <span class="text-danger">*</span></label>
+                                    <input type="file" class="form-control" id="paymentScreenshot" name="paymentScreenshot" accept="image/*">
+                                    <div class="form-text">Accepted: PNG/JPG, up to 5 MB. This helps us verify your payment quickly.</div>
+                                </div>
+                            </div>
+                            
                             <div class="col-12">
                                 <label for="message" class="form-label">Additional Details</label>
                                 <textarea class="form-control" id="message" name="message" rows="3" placeholder="Tell us about your business needs, funding purpose, timeline, etc."></textarea>
@@ -1359,7 +1429,7 @@
 
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="js/config.js"></script>`r`n    <script src="js/main.js"></script>
 </body>
 
 </html>
