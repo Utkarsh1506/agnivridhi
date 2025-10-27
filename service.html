@@ -125,86 +125,196 @@
             <div class="container py-5">
                 <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
                     <h4 class="text-primary">Our Services</h4>
-                    <h1 class="display-5 mb-4">We Services provided best offer</h1>
-                    <p class="mb-0">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur adipisci facilis cupiditate recusandae aperiam temporibus corporis itaque quis facere, numquam, ad culpa deserunt sint dolorem autem obcaecati, ipsam mollitia hic.
+                    <h1 class="display-5 mb-4">Comprehensive Solutions for Your Business Growth</h1>
+                    <p class="mb-0">We provide end-to-end services from funding assistance to certifications and business growth strategies, helping startups and enterprises scale successfully.
                     </p>
                 </div>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="service-item">
-                            <div class="service-img">
-                                <img src="img/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
+
+                <!-- Service Category Tabs -->
+                <div class="service-tabs-container mb-5 wow fadeInUp" data-wow-delay="0.3s">
+                    <ul class="nav nav-pills justify-content-center service-category-tabs" id="serviceTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="funding-tab" data-bs-toggle="pill" data-bs-target="#funding" type="button" role="tab" aria-controls="funding" aria-selected="true">
+                                <i class="fas fa-hand-holding-usd me-2"></i>Funding
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="certifications-tab" data-bs-toggle="pill" data-bs-target="#certifications" type="button" role="tab" aria-controls="certifications" aria-selected="false">
+                                <i class="fas fa-certificate me-2"></i>Certifications & Compliance
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="growth-tab" data-bs-toggle="pill" data-bs-target="#growth" type="button" role="tab" aria-controls="growth" aria-selected="false">
+                                <i class="fas fa-chart-line me-2"></i>Business Growth
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Category Content -->
+                <div class="tab-content" id="serviceTabsContent">
+                    <!-- Funding Services -->
+                    <div class="tab-pane fade show active" id="funding" role="tabpanel" aria-labelledby="funding-tab">
+                        <div class="row g-4">
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+                                <div class="service-item">
+                                    <div class="service-img">
+                                        <img src="img/service-1.jpg" class="img-fluid rounded-top w-100" alt="CGTMSE Loan">
+                                    </div>
+                                    <div class="rounded-bottom p-4">
+                                        <a href="#" class="h4 d-inline-block mb-3">CGTMSE, MUDRA & MSME Loans</a>
+                                        <p class="mb-2 fw-bold text-primary small">Access Collateral-Free Business Loans with Confidence.</p>
+                                        <p class="mb-4">Let us simplify the complex application process for government-backed loan schemes, maximizing your chances of securing the funds you need to operate and expand.
+                                        </p>
+                                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="rounded-bottom p-4">
-                                <a href="#" class="h4 d-inline-block mb-4"> Strategy Consulting</a>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sint? Excepturi facilis neque nesciunt similique officiis veritatis,
-                                </p>
-                                <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
+                                <div class="service-item">
+                                    <div class="service-img">
+                                        <img src="img/service-2.jpg" class="img-fluid rounded-top w-100" alt="Government Grants">
+                                    </div>
+                                    <div class="rounded-bottom p-4">
+                                        <a href="#" class="h4 d-inline-block mb-3">Government Grants & NGO Funding</a>
+                                        <p class="mb-2 fw-bold text-primary small">Unlock Non-Dilutive Capital for Your Mission.</p>
+                                        <p class="mb-4">Navigate the grant application process with our expert guidance, securing vital funds from government and philanthropic sources without giving up equity.
+                                        </p>
+                                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
+                                <div class="service-item">
+                                    <div class="service-img">
+                                        <img src="img/service-3.jpg" class="img-fluid rounded-top w-100" alt="PMEGP Scheme">
+                                    </div>
+                                    <div class="rounded-bottom p-4">
+                                        <a href="#" class="h4 d-inline-block mb-3">PMEGP Scheme</a>
+                                        <p class="mb-2 fw-bold text-primary small">Start Your Dream Venture with a 25-35% Subsidy.</p>
+                                        <p class="mb-4">We provide end-to-end assistance for the Prime Minister's Employment Generation Programme, helping you launch your new business with significant government financial support.
+                                        </p>
+                                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.8s">
+                                <div class="service-item">
+                                    <div class="service-img">
+                                        <img src="img/service-4.jpg" class="img-fluid rounded-top w-100" alt="Startup Funding">
+                                    </div>
+                                    <div class="rounded-bottom p-4">
+                                        <a href="#" class="h4 d-inline-block mb-3">Startup Funding Advisory</a>
+                                        <p class="mb-2 fw-bold text-primary small">Connect with the Right Investors for Your Vision.</p>
+                                        <p class="mb-4">Professional pitch deck preparation, investor introductions, and funding strategy for angel investors, VCs, and government startup schemes to fuel your growth.
+                                        </p>
+                                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="1.0s">
+                                <div class="service-item">
+                                    <div class="service-img">
+                                        <img src="img/service-5.jpg" class="img-fluid rounded-top w-100" alt="Business Loans">
+                                    </div>
+                                    <div class="rounded-bottom p-4">
+                                        <a href="#" class="h4 d-inline-block mb-3">Business Loan Assistance</a>
+                                        <p class="mb-2 fw-bold text-primary small">Secure the Best Financing Options for Your Needs.</p>
+                                        <p class="mb-4">Expert guidance for term loans, working capital, and equipment financing. Compare offers from multiple lenders to get the best rates and terms for your business.
+                                        </p>
+                                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="service-item">
-                            <div class="service-img">
-                                <img src="img/service-2.jpg" class="img-fluid rounded-top w-100" alt="Image">
+
+                    <!-- Certifications & Compliance Services -->
+                    <div class="tab-pane fade" id="certifications" role="tabpanel" aria-labelledby="certifications-tab">
+                        <div class="row g-4">
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+                                <div class="service-item">
+                                    <div class="service-img">
+                                        <img src="img/service-4.jpg" class="img-fluid rounded-top w-100" alt="MSME Registration">
+                                    </div>
+                                    <div class="rounded-bottom p-4">
+                                        <a href="#" class="h4 d-inline-block mb-4">MSME/Udyam Registration</a>
+                                        <p class="mb-4">Quick Udyam registration with all benefits. Get priority in government tenders and loan subsidies with MSME certification.
+                                        </p>
+                                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="rounded-bottom p-4">
-                                <a href="#" class="h4 d-inline-block mb-4">Financial Advisory</a>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sint? Excepturi facilis neque nesciunt similique officiis veritatis,
-                                </p>
-                                <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
+                                <div class="service-item">
+                                    <div class="service-img">
+                                        <img src="img/service-5.jpg" class="img-fluid rounded-top w-100" alt="GST & Tax">
+                                    </div>
+                                    <div class="rounded-bottom p-4">
+                                        <a href="#" class="h4 d-inline-block mb-4">GST & Tax Compliance</a>
+                                        <p class="mb-4">Complete GST registration, filing, and compliance support. Expert tax planning and advisory for business optimization.
+                                        </p>
+                                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="service-item">
-                            <div class="service-img">
-                                <img src="img/service-3.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            </div>
-                            <div class="rounded-bottom p-4">
-                                <a href="#" class="h4 d-inline-block mb-4">Managements</a>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sint? Excepturi facilis neque nesciunt similique officiis veritatis,
-                                </p>
-                                <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="service-item">
-                            <div class="service-img">
-                                <img src="img/service-4.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            </div>
-                            <div class="rounded-bottom p-4">
-                                <a href="#" class="h4 d-inline-block mb-4">Supply Optimization</a>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sint? Excepturi facilis neque nesciunt similique officiis veritatis,
-                                </p>
-                                <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="service-item">
-                            <div class="service-img">
-                                <img src="img/service-5.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            </div>
-                            <div class="rounded-bottom p-4">
-                                <a href="#" class="h4 d-inline-block mb-4">Hr Consulting</a>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sint? Excepturi facilis neque nesciunt similique officiis veritatis,
-                                </p>
-                                <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
+                                <div class="service-item">
+                                    <div class="service-img">
+                                        <img src="img/service-6.jpg" class="img-fluid rounded-top w-100" alt="ISO Certification">
+                                    </div>
+                                    <div class="rounded-bottom p-4">
+                                        <a href="#" class="h4 d-inline-block mb-4">ISO & Quality Certifications</a>
+                                        <p class="mb-4">ISO 9001, 14001, 27001 certifications for enhanced credibility. Full audit support and documentation assistance.
+                                        </p>
+                                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="service-item">
-                            <div class="service-img">
-                                <img src="img/service-6.jpg" class="img-fluid rounded-top w-100" alt="Image">
+
+                    <!-- Business Growth Services -->
+                    <div class="tab-pane fade" id="growth" role="tabpanel" aria-labelledby="growth-tab">
+                        <div class="row g-4">
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+                                <div class="service-item">
+                                    <div class="service-img">
+                                        <img src="img/service-1.jpg" class="img-fluid rounded-top w-100" alt="Strategy Consulting">
+                                    </div>
+                                    <div class="rounded-bottom p-4">
+                                        <a href="#" class="h4 d-inline-block mb-4">Strategy Consulting</a>
+                                        <p class="mb-4">Data-driven business strategy and market entry planning. Competitive analysis and growth roadmap development.
+                                        </p>
+                                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="rounded-bottom p-4">
-                                <a href="#" class="h4 d-inline-block mb-4">Marketing Consulting</a>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sint? Excepturi facilis neque nesciunt similique officiis veritatis,
-                                </p>
-                                <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
+                                <div class="service-item">
+                                    <div class="service-img">
+                                        <img src="img/service-2.jpg" class="img-fluid rounded-top w-100" alt="Digital Marketing">
+                                    </div>
+                                    <div class="rounded-bottom p-4">
+                                        <a href="#" class="h4 d-inline-block mb-4">Digital Marketing</a>
+                                        <p class="mb-4">SEO, social media, and online branding services. Performance marketing campaigns for customer acquisition.
+                                        </p>
+                                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
+                                <div class="service-item">
+                                    <div class="service-img">
+                                        <img src="img/service-3.jpg" class="img-fluid rounded-top w-100" alt="Web Development">
+                                    </div>
+                                    <div class="rounded-bottom p-4">
+                                        <a href="#" class="h4 d-inline-block mb-4">Web Development</a>
+                                        <p class="mb-4">Custom website and web application development. Modern, responsive designs with e-commerce integration.
+                                        </p>
+                                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -351,22 +461,6 @@
                                 <!-- <img src="img/logo.png" alt="Logo"> -->
                             </a>
                             <p class="mb-4">Empowering businesses with strategic funding solutions, certifications, and growth consulting. Your trusted partner in navigating government schemes and achieving sustainable business success.</p>
-                            <div class="d-flex">
-                                <a href="#" class="bg-primary d-flex rounded align-items-center py-2 px-3 me-2">
-                                    <i class="fas fa-apple-alt text-white"></i>
-                                    <div class="ms-3">
-                                        <small class="text-white">Download on the</small>
-                                        <h6 class="text-white">App Store</h6>
-                                    </div>
-                                </a>
-                                <a href="#" class="bg-dark d-flex rounded align-items-center py-2 px-3 ms-2">
-                                    <i class="fas fa-play text-primary"></i>
-                                    <div class="ms-3">
-                                        <small class="text-white">Get it on</small>
-                                        <h6 class="text-white">Google Play</h6>
-                                    </div>
-                                </a>
-                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-2">
