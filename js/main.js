@@ -26,51 +26,47 @@
         }
     });
 
-    // Hero Testimonial Carousel with variable-width cards
+    // Hero Testimonial Carousel - Center focus with pop effect
     $(".testimonial-hero-carousel").owlCarousel({
         autoplay: true,
-        autoplayTimeout: 5000,
+        autoplayTimeout: 3000,
         autoplayHoverPause: false,
         smartSpeed: 800,
         center: true,
-        dots: false,
+        dots: true,
         loop: true,
-        margin: 40,
-        stagePadding: 30,
-        nav : true,
-        navText : [
-            '<i class="fa fa-angle-right"></i>',
-            '<i class="fa fa-angle-left"></i>'
-        ],
+        rewind: false,
+        margin: 30,
+        stagePadding: 0,
+        nav : false,
+        mouseDrag: true,
+        touchDrag: true,
+        pullDrag: true,
         responsiveClass: true,
         responsive: {
             0:{
-                items:1,
-                stagePadding: 20,
-                margin: 20
+                items: 1,
+                margin: 15
             },
             576:{
-                items:1,
-                stagePadding: 40,
-                margin: 25
+                items: 1,
+                margin: 20
             },
             768:{
-                items:2,
-                stagePadding: 50,
-                margin: 30
+                items: 3,
+                margin: 25
             },
             992:{
-                items:2,
-                stagePadding: 60,
-                margin: 35
+                items: 3,
+                margin: 30
             },
             1200:{
-                items:3,
-                stagePadding: 80,
-                margin: 40
+                items: 3,
+                margin: 30
             }
         }
     });
+
 
     // Hero Header carousel
     $(".header-carousel").owlCarousel({

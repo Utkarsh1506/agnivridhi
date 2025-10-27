@@ -93,6 +93,9 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 </head>
 
 <body>
@@ -178,7 +181,7 @@
                     <div class="col-lg-10">
                         <div class="text-center py-5">
                             <p class="text-uppercase fw-bold mb-3" style="background: linear-gradient(135deg, #155e75 0%, #0891b2 50%, #2dd4bf 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 14px; letter-spacing: 2px;">WELCOME TO AGNIVRIDHI INDIA
-                            <h1 class="display-3 fw-bold mb-4" style="color: #1a1a1a; line-height: 1.2;">Empowering Startups with Growth, Funding & Certification Solutions</h1>
+                            <h1 class="display-3 fw-bold mb-4" style="color: #1a1a1a; line-height: 1.2;">Where Business Meets Capital</h1>
                             
                             <!-- Testimonials Carousel -->
                             <div class="testimonials-carousel mt-5">
@@ -196,7 +199,7 @@
                                                         <h5 class="card-title fw-bold mb-3" style="color: #1a1a1a;">FROM IDEA TO ACTION</h5>
                                                         <div class="d-flex align-items-start mb-3">
                                                             <div class="me-3">
-                                                                <img src="img/logo1.png" alt="Elux Cart" style="width: 50px; height: 50px; object-fit: contain;">
+                                                                <img src="img/logo1.png" alt="Elux Cart" style="width: 50px; height: 50px; object-fit: contain; border-radius: 50%;">
                                                             </div>
                                                             <div class="text-start flex-grow-1">
                                                                 <p class="mb-2 small testimonial-excerpt" style="color: #555; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">Elux Cart transformed from a concept into a thriving grocery retail chain across India. With CGTMSE funding support from Growthera Ventures, they secured collateral-free financing to launch multiple stores and achieve complete regulatory compliance for rapid business expansion.</p>
@@ -224,11 +227,9 @@
                                                                 <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #2dd4bf 0%, #20e3b2 50%, #29ffc6 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                                                                     <i class="fas fa-fire fa-2x text-white"></i>
                                                                 </div>
-                                                                <!-- <p class="mb-0 mt-2 fw-bold small" style="color: #1a1a1a;">HAMARA<br>PETROL PUMP</p>
-                                                                <p class="mb-0 small" style="color: #666;">OIL AND GAS</p> -->
                                                             </div>
                                                             <div class="text-start flex-grow-1">
-                                                                <p class="mb-2 small" style="color: #555; line-height: 1.6;">Hamara Petrol Pump established itself as a premium fuel station delivering quality service across the region.  </p>
+                                                                <p class="mb-2 small" style="color: #555; line-height: 1.6;">Hamara Petrol Pump established itself as a premium fuel station delivering quality service across the region.</p>
                                                             </div>
                                                         </div>
                                                         <div class="mt-auto">
@@ -250,7 +251,7 @@
                                                         <h5 class="card-title fw-bold mb-3" style="color: #1a1a1a;">NEIGHBORHOOD GROWTH</h5>
                                                         <div class="d-flex align-items-start mb-3">
                                                             <div class="me-3">
-                                                                <img src="img/team-2.jpg" alt="Priya Kirana" style="width: 60px; height: 60px; border-radius: 10px; object-fit: cover;">
+                                                                <img src="img/team-2.jpg" alt="Priya Kirana" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
                                                             </div>
                                                             <div class="text-start flex-grow-1">
                                                                 <h6 class="mb-2 fw-bold" style="color: #1a1a1a;">PRIYA KIRANA<br><span class="small" style="color: #666;">STORE</span></h6>
@@ -1002,137 +1003,103 @@
         <div class="container pb-5">
             <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
                 <h4 class="text-primary">Testimonial</h4>
-                <h1 class="display-5 mb-4">Our Clients Riviews</h1>
-                <p class="mb-0">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur adipisci facilis
-                    cupiditate recusandae aperiam temporibus corporis itaque quis facere, numquam, ad culpa deserunt
-                    sint dolorem autem obcaecati, ipsam mollitia hic.
+                <h1 class="display-5 mb-4">Our Clients Reviews</h1>
+                <p class="mb-0">Hear from our satisfied clients who have transformed their businesses with Agnivridhi's expert guidance and support.
                 </p>
             </div>
-            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.2s">
-                <div class="testimonial-item">
-                    <div class="testimonial-quote-left">
-                        <i class="fas fa-quote-left fa-2x"></i>
+            <div class="mdw-curved-slider-speed-25-gap-15-curve-15" style="--min-height: 500px; position: relative;">
+                <div class="elementor-widget-image-gallery" style="display: none;">
+                    <div class="gallery-item">
+                        <img src="img/testimonial-1.jpg" alt="Client 1">
                     </div>
-                    <div class="testimonial-img">
-                        <img src="img/testimonial-1.jpg" class="img-fluid" alt="Image">
+                    <div class="gallery-item">
+                        <img src="img/testimonial-2.jpg" alt="Client 2">
                     </div>
-                    <div class="testimonial-text">
-                        <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis blanditiis
-                            excepturi quisquam temporibus voluptatum reprehenderit culpa, quasi corrupti laborum
-                            accusamus.
-                        </p>
+                    <div class="gallery-item">
+                        <img src="img/testimonial-3.jpg" alt="Client 3">
                     </div>
-                    <div class="testimonial-title">
-                        <div>
-                            <h4 class="mb-0">Person Name</h4>
-                            <p class="mb-0">Profession</p>
-                        </div>
-                        <div class="d-flex text-primary">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
+                    <div class="gallery-item">
+                        <img src="img/testimonial-1.jpg" alt="Client 4">
                     </div>
-                    <div class="testimonial-quote-right">
-                        <i class="fas fa-quote-right fa-2x"></i>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-quote-left">
-                        <i class="fas fa-quote-left fa-2x"></i>
-                    </div>
-                    <div class="testimonial-img">
-                        <img src="img/testimonial-2.jpg" class="img-fluid" alt="Image">
-                    </div>
-                    <div class="testimonial-text">
-                        <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis blanditiis
-                            excepturi quisquam temporibus voluptatum reprehenderit culpa, quasi corrupti laborum
-                            accusamus.
-                        </p>
-                    </div>
-                    <div class="testimonial-title">
-                        <div>
-                            <h4 class="mb-0">Person Name</h4>
-                            <p class="mb-0">Profession</p>
-                        </div>
-                        <div class="d-flex text-primary">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="testimonial-quote-right">
-                        <i class="fas fa-quote-right fa-2x"></i>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-quote-left">
-                        <i class="fas fa-quote-left fa-2x"></i>
-                    </div>
-                    <div class="testimonial-img">
-                        <img src="img/testimonial-3.jpg" class="img-fluid" alt="Image">
-                    </div>
-                    <div class="testimonial-text">
-                        <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis blanditiis
-                            excepturi quisquam temporibus voluptatum reprehenderit culpa, quasi corrupti laborum
-                            accusamus.
-                        </p>
-                    </div>
-                    <div class="testimonial-title">
-                        <div>
-                            <h4 class="mb-0">Person Name</h4>
-                            <p class="mb-0">Profession</p>
-                        </div>
-                        <div class="d-flex text-primary">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="testimonial-quote-right">
-                        <i class="fas fa-quote-right fa-2x"></i>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-quote-left">
-                        <i class="fas fa-quote-left fa-2x"></i>
-                    </div>
-                    <div class="testimonial-img">
-                        <img src="img/testimonial-2.jpg" class="img-fluid" alt="Image">
-                    </div>
-                    <div class="testimonial-text">
-                        <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis blanditiis
-                            excepturi quisquam temporibus voluptatum reprehenderit culpa, quasi corrupti laborum
-                            accusamus.
-                        </p>
-                    </div>
-                    <div class="testimonial-title">
-                        <div>
-                            <h4 class="mb-0">Person Name</h4>
-                            <p class="mb-0">Profession</p>
-                        </div>
-                        <div class="d-flex text-primary">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="testimonial-quote-right">
-                        <i class="fas fa-quote-right fa-2x"></i>
+                    <div class="gallery-item">
+                        <img src="img/testimonial-2.jpg" alt="Client 5">
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Testimonial End -->
+
+
+    <!-- Testimonial Cards Overlay -->
+    <div class="testimonial-cards-overlay">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">Agnivridhi helped us secure a collateral-free loan of ₹5 lakhs within just 2 weeks! Their team guided us through every step of the PMEGP loan process.</p>
+                        <div class="testimonial-author">
+                            <h5>Priya Sharma</h5>
+                            <span class="text-primary">Kirana Store Owner</span>
+                        </div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">Getting our MSME registration and GST filing done through Agnivridhi was seamless. They handled all the paperwork and compliance, saving us countless hours.</p>
+                        <div class="testimonial-author">
+                            <h5>Rajesh Kumar</h5>
+                            <span class="text-primary">Electronics Shop Owner</span>
+                        </div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">Agnivridhi not only helped us get our Startup India certificate but also built our entire e-commerce website! Our sales boosted by 40% in the first quarter.</p>
+                        <div class="testimonial-author">
+                            <h5>Amit Verma</h5>
+                            <span class="text-primary">E-commerce Founder</span>
+                        </div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remove old testimonial items below this line -->
+    </div>
+    <!-- Testimonial End -->
+
 
     <!-- Footer Start -->
     <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
@@ -1425,6 +1392,194 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    
+    <!-- Three.js Curved Slider Script -->
+    <script>
+    if(!window.MDWNonce111){
+        window.MDWNonce111 = true;
+
+        var selector = "[class^='mdw-curved-slider'], [class*=' mdw-curved-slider']",
+            scene = [],
+            renderer = [],
+            options = [],
+            time = [],
+            camera = [],
+            slideAmount = [],
+            currentContainerHeight = [],
+            previousContainerHeight = [],
+            planes = [];
+
+        addEventListener('DOMContentLoaded', function(){
+            
+        function getWidth(gap){ return 1 + gap/100 }
+
+        function getPlaneWidth(el, camera){
+            var vFov = camera.fov*Math.PI/180,
+            height = 2*Math.tan(vFov/2)*camera.position.z,
+            aspect = el.clientWidth/el.clientHeight,
+            width = height*aspect;
+            return el.clientWidth/width;
+        }
+
+        function init(e = 'none'){
+        Array.from(document.querySelectorAll(selector)).forEach(function(el, index){
+            
+            if( e == 'none' ){
+                currentContainerHeight[index] = previousContainerHeight[index] = el.clientHeight;
+            }else{
+                currentContainerHeight[index] = el.clientHeight;
+                if( mobileHeightChage && currentContainerHeight[index] == previousContainerHeight[index] ) return;
+            }
+
+            previousContainerHeight[index] = currentContainerHeight[index];
+            
+            var className = el.getAttribute('class'),
+            classNameIndex = className.indexOf('mdw-curved-slider'),
+            shortClass = className.substring(classNameIndex, className.indexOf(' ',classNameIndex)),
+            values = shortClass.split('-');
+            
+            if(shortClass.indexOf(' ') === -1) {
+                shortClass = className.substring(classNameIndex);
+                values = shortClass.split('-');
+            }
+            
+            options[index] = {
+                speed: 30,
+                gap: 10,
+                curve: 12,
+                direction: -1
+            };
+            
+            values.forEach(function(value, i){
+                if(value=='speed' && values[i+1] && !isNaN(values[i+1])){
+                    options[index].speed = values[i+1]; }
+                if(value=='gap' && values[i+1] && !isNaN(values[i+1])){
+                    options[index].gap = values[i+1]; }
+                if(value=='curve' && values[i+1] && !isNaN(values[i+1])){
+                    options[index].curve = values[i+1]; }
+                if(value=='reverse'){ options[index].direction = 1; }
+            });
+            
+            var images = [],
+                allImages = [];
+                
+            time[index] = 0;
+                
+            Array.from(el.querySelectorAll('.elementor-widget-image-gallery .gallery-item')).forEach(function(el){
+                var img = el.querySelector('img');
+                if(img) images.push(img.getAttribute('src'));
+            });
+            
+            if(images.length === 0) return;
+            
+            allImages = images;
+            slideAmount[index] = images.length;
+
+            scene[index] = new THREE.Scene();
+            camera[index] = new THREE.PerspectiveCamera( 75, el.clientWidth / el.clientHeight, 0.1, 20 );
+            camera[index].position.z = 2;
+            
+            renderer[index] = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer[index].setSize(el.clientWidth, el.clientHeight);
+            renderer[index].setPixelRatio(window.devicePixelRatio);
+            
+            var previousCanvas = el.querySelector('canvas');
+            if(previousCanvas) { el.removeChild(previousCanvas); }
+            el.appendChild(renderer[index].domElement);
+            
+            var geometry = new THREE.PlaneGeometry(1, 1, 20, 20),
+                planeSpace = getPlaneWidth(el,camera[index])*getWidth(options[index].gap),
+                totalImage = Math.ceil(el.clientWidth/planeSpace) + 1 + images.length,
+                initialOffset = Math.ceil(el.clientWidth/(2*planeSpace)-0.5);
+                
+            for( var i = slideAmount[index]; i < totalImage; i++ ){
+                allImages.push(images[i%slideAmount[index]]);
+            }
+            
+            planes[index] = [];
+            
+            allImages.forEach(function (image, i) {
+                var loader = new THREE.TextureLoader();
+                loader.load(
+                    image,
+                    function ( texture ) {
+                        var material = new THREE.ShaderMaterial({
+                            uniforms: {
+                                tex: { value: texture },
+                                curve: { value: options[index].curve }
+                            },
+                            vertexShader: `
+                                uniform float curve;
+                                varying vec2 vertexUV;
+                                void main(){
+                                    vertexUV = uv;
+                                    vec3 newPosition = position;
+                                    float distanceFromCenter = abs(modelMatrix*vec4(position, 1.0)).x;
+                                    newPosition.y *= 1.0 + (curve/100.0)*pow(distanceFromCenter,2.0);
+                                    
+                                    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+                                }
+                            `,
+                            fragmentShader: `
+                                uniform sampler2D tex;
+                                varying vec2 vertexUV;
+                                void main(){
+                                    gl_FragColor = texture2D(tex, vertexUV);
+                                }
+                            `
+                        });
+
+                        planes[index][i] = new THREE.Mesh( geometry, material );
+                        planes[index][i].position.x = -1*options[index].direction*(i-initialOffset)*getWidth(options[index].gap);
+                        scene[index].add( planes[index][i] );
+                    }
+                );
+            });
+        });
+        }
+        init();
+
+        var currentWidth,
+            previousWidth = window.innerWidth,
+            mobileHeightChage = false;
+            
+        function onResize(){
+            currentWidth = window.innerWidth;
+            mobileHeightChage = currentWidth < 768 && currentWidth == previousWidth;
+            init('resize');
+            previousWidth = currentWidth;
+        }
+
+        window.addEventListener('resize', function(){
+            onResize();
+            setTimeout(onResize, 100);
+        });
+
+        var previousTime = 0;
+
+        function animate(currentTime){
+            
+            var timePassed = currentTime - previousTime;
+            
+            Array.from(document.querySelectorAll(selector)).forEach(function(el, index){
+                if(scene[index] && renderer[index] && camera[index]) {
+                    if(Math.abs(scene[index].position.x) >= getWidth(options[index].gap)*slideAmount[index]){ 
+                        time[index] = 0; 
+                    }
+                    time[index] += options[index].direction*timePassed*0.00001;
+                    scene[index].position.x = time[index]*options[index].speed;
+                    renderer[index].render(scene[index], camera[index]);
+                }
+            });
+            
+            previousTime = currentTime;
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+
+        });
+    }
+    </script>
 </body>
 
 </html>
