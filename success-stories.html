@@ -29,6 +29,22 @@
 </head>
 
 <body>
+
+<style>
+    .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+    }
+
+    /* Clear floats after image containers */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-gradient" role="status" style="width: 3rem; height: 3rem;">
@@ -155,63 +171,87 @@
                 </p>
             </div>
             <div class="row g-4">
+                <!-- George Martin Jose - CGTMSE -->
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="card h-100 shadow-sm border-0 rounded-3">
-                        <img src="img/service-1.jpg" class="card-img-top" alt="Elux Cart Grocery Chain">
-                        <div class="card-body p-4">
-                            <span class="badge bg-primary mb-3">CGTMSE Funding</span>
-                            <h5 class="card-title">Elux Cart: From Idea to Multi-Store Chain</h5>
-                            <p class="card-text">Elux Cart transformed from a concept into a thriving grocery retail chain across India. With CGTMSE support, they secured collateral-free financing to launch multiple stores and achieve complete regulatory compliance for rapid expansion.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="card h-100 shadow-sm border-0 rounded-3">
-                        <img src="img/service-2.jpg" class="card-img-top" alt="Hamara Petrol Pump">
+                        <img src="img/service-1.jpg" class="card-img-top" alt="George Martin Jose CGTMSE">
                         <div class="card-body p-4">
                             <span class="badge bg-primary mb-3">CGTMSE Loan</span>
-                            <h5 class="card-title">Hamara Petrol: Financing Infrastructure Growth</h5>
-                            <p class="card-text">Hamara Petrol Pump established itself as a premium fuel station. With collateral-free funding through CGTMSE, they built critical infrastructure and met surging demand with operational excellence.</p>
+                            <h5 class="card-title">George Martin Jose: Scaling Operations</h5>
+                            <p class="card-text">Secured ₹35L collateral-free capital under CGTMSE to expand operations, improve working capital cycles, and streamline compliance—approved in just 30 days.</p>
+                            <a href="cgtmse-george-martin-jose.html" class="btn btn-outline-primary btn-sm mt-2">Read More <i class="fas fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
-                    <div class="card h-100 shadow-sm border-0 rounded-3">
-                        <img src="img/service-3.jpg" class="card-img-top" alt="Priya Kirana Store">
-                        <div class="card-body p-4">
-                            <span class="badge bg-primary mb-3">Growth Capital</span>
-                            <h5 class="card-title">Priya Kirana: Capital for Expansion</h5>
-                            <p class="card-text">Priya Kirana Store secured growth capital for expansion, infrastructure upgrades, and inventory enhancement—enabling better service and consistent growth in a competitive neighborhood market.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="card h-100 shadow-sm border-0 rounded-3">
-                        <img src="img/about-1.jpg" class="card-img-top" alt="Manufacturing SME Scale-up">
-                        <div class="card-body p-4">
-                            <span class="badge bg-primary mb-3">PMEGP</span>
-                            <h5 class="card-title">Precision Mfg: New Line Launched</h5>
-                            <p class="card-text">Under PMEGP, this manufacturing unit launched a new product line, fulfilled compliance, and hired 20+ skilled workers within 60 days.</p>
-                        </div>
-                    </div>
-                </div>
+                <!-- Pal & Sons Agro - Incorporation + Seed Fund -->
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
                     <div class="card h-100 shadow-sm border-0 rounded-3">
-                        <img src="img/about-2.png" class="card-img-top" alt="Retail Digital Expansion">
+                        <img src="img/pal_and_sons.png" class="card-img-top" alt="Pal and Sons Agro">
                         <div class="card-body p-4">
-                            <span class="badge bg-primary mb-3">Digital Growth</span>
-                            <h5 class="card-title">Fashion Co.: From Local to D2C</h5>
-                            <p class="card-text">We built a D2C funnel, enabled GST-compliant invoicing, and implemented inventory controls to double monthly orders.</p>
+                            <span class="badge bg-primary mb-3">Incorporation + Seed Fund</span>
+                            <h5 class="card-title">Pal & Sons Agro: From Setup to Investor-Ready</h5>
+                            <p class="card-text">End-to-end incorporation support and investor readiness—structured documents and projections unlocked seed funding and compliance in 15 days.</p>
+                            <a href="incorporation-palandsons.html" class="btn btn-outline-primary btn-sm mt-2">Read More <i class="fas fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
+                <!-- Vedanta Cosmetics - PMEGP -->
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
                     <div class="card h-100 shadow-sm border-0 rounded-3">
-                        <img src="img/about-3.png" class="card-img-top" alt="Food Processing Subsidy">
+                        <img src="img/vedanta_cosmetic.jpg" class="card-img-top" alt="Vedanta Cosmetics">
                         <div class="card-body p-4">
-                            <span class="badge bg-primary mb-3">Subsidy Advisory</span>
-                            <h5 class="card-title">Food Processing: Machinery Subsidy</h5>
-                            <p class="card-text">Optimized documents and secured a machinery subsidy under a state scheme—reducing CapEx and improving unit economics.</p>
+                            <span class="badge bg-primary mb-3">PMEGP</span>
+                            <h5 class="card-title">Vedanta Cosmetics: Manufacturing Launch</h5>
+                            <p class="card-text">Enabled 35% PMEGP subsidy to establish a compliant manufacturing unit, create 25+ jobs, and launch new product lines within 60 days.</p>
+                            <a href="pmegp-vedanta-cosmetics.html" class="btn btn-outline-primary btn-sm mt-2">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Aadhithya Energy Filling Station - Website -->
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.8s">
+                    <div class="card h-100 shadow-sm border-0 rounded-3">
+                        <img src="img/aaditthya_filling_station.png" class="card-img-top" alt="Aadhithya Energy">
+                        <div class="card-body p-4">
+                            <span class="badge bg-primary mb-3">Website Launch</span>
+                            <h5 class="card-title">Aadhithya Energy: Digital Discovery</h5>
+                            <p class="card-text">Designed and launched a modern, high-conversion website to boost local discovery—tripled inbound inquiries within weeks.</p>
+                            <a href="website-aadhithya-energy.html" class="btn btn-outline-primary btn-sm mt-2">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Vishwam Pandya Enterprises - CGTMSE + Website -->
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="1.0s">
+                    <div class="card h-100 shadow-sm border-0 rounded-3">
+                        <img src="img/vishwam_enterprises.jpg" class="card-img-top" alt="Vishwam Pandya Enterprises">
+                        <div class="card-body p-4">
+                            <span class="badge bg-primary mb-3">CGTMSE + Website</span>
+                            <h5 class="card-title">Vishwam Pandya: Capital & Credibility</h5>
+                            <p class="card-text">Secured ₹40L CGTMSE funding and launched a refreshed brand website—unlocking both capital and credibility for new client acquisition.</p>
+                            <a href="cgtmse-website-vishwam-pandya.html" class="btn btn-outline-primary btn-sm mt-2">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- GOLDI Kirana Store - CGTMSE -->
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="1.2s">
+                    <div class="card h-100 shadow-sm border-0 rounded-3">
+                        <img src="img/goldi_kirana_store.png" class="card-img-top" alt="Goldi Kirana Store">
+                        <div class="card-body p-4">
+                            <span class="badge bg-primary mb-3">CGTMSE Funding</span>
+                            <h5 class="card-title">GOLDI Kirana: Expanding Inventory</h5>
+                            <p class="card-text">Accessed ₹18L collateral-free CGTMSE funding to expand inventory depth, improve margins, and boost monthly sales by 28%.</p>
+                            <a href="cgtmse-goldi-kirana.html" class="btn btn-outline-primary btn-sm mt-2">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Hands of Happiness - CSR Funding -->
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="card h-100 shadow-sm border-0 rounded-3">
+                        <img src="img/service-2.jpg" class="card-img-top" alt="Hands of Happiness">
+                        <div class="card-body p-4">
+                            <span class="badge bg-primary mb-3">CSR Funding</span>
+                            <h5 class="card-title">Hands of Happiness: Social Impact</h5>
+                            <p class="card-text">Structured a ₹12L CSR grant proposal and compliance framework to secure funding for 3 high-impact community programs.</p>
+                            <a href="csr-hands-of-happiness.html" class="btn btn-outline-primary btn-sm mt-2">Read More <i class="fas fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
