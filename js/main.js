@@ -333,8 +333,9 @@
         var mobileVal = $('#mobile').val();
         var emailVal = $('#email').val();
         var businessNameVal = $('#businessName').val() || 'Not Provided';
-        var businessTypeVal = $('#businessType').val();
-        var fundingRequiredVal = $('#fundingRequired').val();
+    var businessTypeVal = $('#businessType').val();
+    // Funding Required field was removed from forms; keep param optional/blank for compatibility
+    var fundingRequiredVal = '';
         var serviceInterestedVal = $('#serviceInterested').val();
         var preferredDateVal = $('#preferredDate').val();
         var preferredTimeVal = $('#preferredTime').val();
@@ -382,7 +383,6 @@
             gtag('event', 'form_submission', {
                 event_category: 'Consultation Form',
                 event_label: formData.serviceInterested,
-                value: formData.fundingRequired,
                 business_type: formData.businessType
             });
         }
@@ -436,9 +436,7 @@
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'Lead', {
                     content_name: formData.serviceInterested,
-                    content_category: 'Consultation',
-                    value: formData.fundingRequired,
-                    currency: 'INR'
+                    content_category: 'Consultation'
                 });
             }
             
@@ -523,7 +521,7 @@
             email: $('#contactEmail').val(),
             businessName: $('#contactProject').val() || 'Not Provided',
             businessType: 'Contact Form Inquiry',
-            fundingRequired: 'N/A',
+            fundingRequired: 'Not specified',
             serviceInterested: $('#contactSubject').val(),
             message: $('#contactMessage').val(),
             timestamp: new Date().toISOString(),

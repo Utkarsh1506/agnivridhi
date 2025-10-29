@@ -91,8 +91,8 @@ if (isset($input['recaptchaToken'])) {
     }
 }
 
-// Validate required fields
-$requiredFields = ['fullName', 'mobile', 'email', 'businessType', 'fundingRequired', 'serviceInterested'];
+// Validate required fields (fundingRequired removed from forms, now optional)
+$requiredFields = ['fullName', 'mobile', 'email', 'businessType', 'serviceInterested'];
 $errors = [];
 
 foreach ($requiredFields as $field) {
@@ -117,14 +117,14 @@ if (!empty($errors)) {
     exit;
 }
 
-// Sanitize all inputs
+// Sanitize all inputs (fundingRequired is now optional)
 $data = [
     'fullName' => sanitizeInput($input['fullName']),
     'mobile' => sanitizeInput($input['mobile']),
     'email' => sanitizeInput($input['email']),
     'businessName' => sanitizeInput($input['businessName'] ?? ''),
     'businessType' => sanitizeInput($input['businessType']),
-    'fundingRequired' => sanitizeInput($input['fundingRequired']),
+    'fundingRequired' => sanitizeInput($input['fundingRequired'] ?? 'Not specified'),
     'serviceInterested' => sanitizeInput($input['serviceInterested']),
     'message' => sanitizeInput($input['message'] ?? ''),
     'submittedAt' => date('Y-m-d H:i:s'),
