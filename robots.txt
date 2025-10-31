@@ -1,4 +1,21 @@
 User-agent: *
+# allow crawling of the public site
+Allow: /
+
+# block sensitive or non-SEO endpoints
+Disallow: /admin/
+Disallow: /api/
+Disallow: /wp-admin/
+Disallow: /cgi-bin/
+
+# Crawl-delay can be set for polite crawling (not all bots respect it)
+# Crawl-delay: 10
+
+# Sitemap
+Sitemap: https://agnivridhiindia.com/sitemap.xml
+
+# Note: if you later host different language versions, consider adding
+# hreflang and language-specific sitemaps.User-agent: *
 Disallow:
 
 Sitemap: https://agnivridhiindia.com/sitemap.xml
