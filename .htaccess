@@ -20,6 +20,9 @@
 
     # 301 redirect /consultation to contact page (site has no consultation page)
     RewriteRule ^consultation/?$ /contact.html [L,R=301]
+    
+    # 301 redirect /index.html or /index.htm to root (prefer clean homepage URL)
+    RewriteRule ^index(\.html?|\.htm)?$ / [L,R=301,NC]
 </IfModule>
 
 <IfModule mod_headers.c>
