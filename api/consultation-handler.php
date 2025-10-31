@@ -25,33 +25,42 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // ==============================================
-// CONFIGURATION - Update these with your details
+// CONFIGURATION
+// Prefer loading secrets from api/config.php (untracked). If not present,
+// fall back to the inline defaults below so the handler continues to work.
 // ==============================================
 
-// Email Configuration
-define('ADMIN_EMAIL', 'info@agnivridhiindia.com'); // Your admin email
-define('FROM_EMAIL', 'noreply@agnivridhiindia.com'); // From email
-define('FROM_NAME', 'Agnivridhi India');
-define('REPLY_TO_EMAIL', 'info@agnivridhiindia.com');
+$configPath = __DIR__ . '/config.php';
+if (file_exists($configPath)) {
+    // Load user-provided secure config (should define constants like
+    // RECAPTCHA_SECRET_KEY, ADMIN_EMAIL, FROM_EMAIL, etc.)
+    require_once $configPath;
+} else {
+    // Fallback defaults (safe but non-secret placeholders)
+    // Email Configuration
+    define('ADMIN_EMAIL', 'info@agnivridhiindia.com'); // Your admin email
+    define('FROM_EMAIL', 'noreply@agnivridhiindia.com'); // From email
+    define('FROM_NAME', 'Agnivridhi India');
+    define('REPLY_TO_EMAIL', 'info@agnivridhiindia.com');
 
-// Zoho CRM Configuration (if using Zoho)
-define('ZOHO_CRM_ENABLED', false); // Set to true when ready
-define('ZOHO_ACCESS_TOKEN', 'your_zoho_access_token_here');
-define('ZOHO_REFRESH_TOKEN', 'your_zoho_refresh_token_here');
-define('ZOHO_CLIENT_ID', 'your_zoho_client_id_here');
-define('ZOHO_CLIENT_SECRET', 'your_zoho_client_secret_here');
+    // Zoho CRM Configuration (if using Zoho)
+    define('ZOHO_CRM_ENABLED', false); // Set to true when ready
+    define('ZOHO_ACCESS_TOKEN', 'your_zoho_access_token_here');
+    define('ZOHO_REFRESH_TOKEN', 'your_zoho_refresh_token_here');
+    define('ZOHO_CLIENT_ID', 'your_zoho_client_id_here');
+    define('ZOHO_CLIENT_SECRET', 'your_zoho_client_secret_here');
 
-// Google Sheets Integration (Alternative to CRM)
-define('GOOGLE_SHEETS_ENABLED', true); // Set to true when ready
-define('GOOGLE_SHEETS_URL', 'https://script.google.com/macros/s/AKfycbxI0HgjNDeWgfmoQwXHvZG94459PQ5SOuoD_xDYSgXjutTcLKclDUPcgn1krdZ3xGJI/exec');
+    // Google Sheets Integration (Alternative to CRM)
+    define('GOOGLE_SHEETS_ENABLED', true); // Set to true when ready
+    define('GOOGLE_SHEETS_URL', 'https://script.google.com/macros/s/AKfycbxI0HgjNDeWgfmoQwXHvZG94459PQ5SOuoD_xDYSgXjutTcLKclDUPcgn1krdZ3xGJI/exec');
 
-// reCAPTCHA Configuration
-define('RECAPTCHA_SECRET_KEY', '6LePnfYrAAAAAHjH6VZUR3xuz7zGquuC7NItYY7O');
+    // reCAPTCHA Configuration (fallback placeholder)
+    define('RECAPTCHA_SECRET_KEY', '6Lc0DP0rAAAAALzusQ2hOtojKuLB-agshcJSsGX-');
 
-// SendGrid/SMTP Configuration (choose one)
-define('USE_SENDGRID', false); // Set to true if using SendGrid
-define('SENDGRID_API_KEY', 'your_sendgrid_api_key_here');
-
+    // SendGrid/SMTP Configuration (choose one)
+    define('USE_SENDGRID', false); // Set to true if using SendGrid
+    define('SENDGRID_API_KEY', 'your_sendgrid_api_key_here');
+}
 // ==============================================
 // VALIDATION & SANITIZATION
 // ==============================================

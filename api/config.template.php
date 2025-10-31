@@ -14,8 +14,8 @@
 // 1. GOOGLE reCAPTCHA v3
 // ============================================
 // Get keys from: https://www.google.com/recaptcha/admin
-define('RECAPTCHA_SITE_KEY', '6LfYourSiteKeyHere_REPLACE_ME');
-define('RECAPTCHA_SECRET_KEY', 'YourSecretKeyHere_REPLACE_ME');
+define('RECAPTCHA_SITE_KEY', '6Lc0DP0rAAAAAKuwLNnne-ogAHK-5JH0ANJLsmk_');
+define('RECAPTCHA_SECRET_KEY', '6Lc0DP0rAAAAALzusQ2hOtojKuLB-agshcJSsGX-');
 
 // ============================================
 // 2. GOOGLE ANALYTICS 4 (GA4)

@@ -1,12 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://agnivridhiindia.com/</loc></url>
-  <url><loc>https://agnivridhiindia.com/about</loc></url>
-  <url><loc>https://agnivridhiindia.com/service</loc></url>
-  <url><loc>https://agnivridhiindia.com/feature</loc></url>
-  <url><loc>https://agnivridhiindia.com/blog</loc></url>
-  <url><loc>https://agnivridhiindia.com/success-stories</loc></url>
-  <url><loc>https://agnivridhiindia.com/FAQ</loc></url>
-  <url><loc>https://agnivridhiindia.com/team</loc></url>
-  <url><loc>https://agnivridhiindia.com/contact</loc></url>
+  <!-- Auto-generated sitemap - generated on 2025-10-31 -->
+
+  <url>
+    <loc>https://agnivridhiindia.com/</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+
+  <url>
+    <loc>https://agnivridhiindia.com/about.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://agnivridhiindia.com/service.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://agnivridhiindia.com/blog.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://agnivridhiindia.com/contact.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://agnivridhiindia.com/success-stories.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Case / project pages -->
+  <url>
+    <loc>https://agnivridhiindia.com/cgtmse-goldi-kirana.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/cgtmse-george-martin-jose.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/cgtmse-eluxcart.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/cgtmse-hamarapetrol.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/cgtmse-website-vishwam-pandya.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/pmegp-vedanta-cosmetics.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/website-aadhithya-energy.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/incorporation-palandsons.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/funding-priyakirana.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/csr-hands-of-happiness.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+
+  <!-- Utility / other pages -->
+  <url>
+    <loc>https://agnivridhiindia.com/feature.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/team.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/FAQ.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/quick-start.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/start-server.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/troubleshoot-sheets.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+
+  <!-- Error pages (low priority) -->
+  <url>
+    <loc>https://agnivridhiindia.com/404.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.10</priority>
+  </url>
+  <url>
+    <loc>https://agnivridhiindia.com/500.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.10</priority>
+  </url>
+
 </urlset>

@@ -12,8 +12,8 @@ Write-Host ""
 
 # Google reCAPTCHA
 Write-Host "1. Google reCAPTCHA v3" -ForegroundColor Green
-$recaptchaSiteKey = Read-Host "6LePnfYrAAAAADeuSp1IJtJ_fyCSsEB9y-BVCoqz"
-$recaptchaSecretKey = Read-Host "6LePnfYrAAAAAHjH6VZUR3xuz7zGquuC7NItYY7O"
+$recaptchaSiteKey = Read-Host "6Lc0DP0rAAAAAKuwLNnne-ogAHK-5JH0ANJLsmk_"
+$recaptchaSecretKey = Read-Host "6Lc0DP0rAAAAALzusQ2hOtojKuLB-agshcJSsGX-"
 Write-Host ""
 
 # Google Analytics

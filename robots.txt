@@ -1,3 +1,10 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://agnivridhiindia.com/sitemap.xml
+
+# If you have staging or admin paths to block, add them here, e.g.:
+# Disallow: /staging/
 # Robots.txt for Agnivridhi India
 User-agent: *
 Allow: /

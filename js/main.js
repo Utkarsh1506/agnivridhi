@@ -296,7 +296,7 @@
                     return new Promise(function(resolve, reject) {
                         grecaptcha.ready(function() {
                             try {
-                                grecaptcha.execute('6LePnfYrAAAAADeuSp1IJtJ_fyCSsEB9y-BVCoqz', {action: 'consultation'})
+                                grecaptcha.execute('6Lc0DP0rAAAAAKuwLNnne-ogAHK-5JH0ANJLsmk_', {action: 'consultation'})
                                     .then(function(token) {
                                         console.log('✅ reCAPTCHA token received:', token ? 'Valid' : 'Null');
                                         submitConsultationForm(token, $submitBtn, originalBtnText);
@@ -504,7 +504,7 @@
         // Execute reCAPTCHA v3
         if (typeof grecaptcha !== 'undefined') {
             grecaptcha.ready(function() {
-                grecaptcha.execute('6LePnfYrAAAAADeuSp1IJtJ_fyCSsEB9y-BVCoqz', {action: 'contact'}).then(function(token) {
+                grecaptcha.execute('6Lc0DP0rAAAAAKuwLNnne-ogAHK-5JH0ANJLsmk_', {action: 'contact'}).then(function(token) {
                     submitContactForm(token, $submitBtn, originalBtnText);
                 });
             });
