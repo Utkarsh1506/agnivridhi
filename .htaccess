@@ -23,6 +23,9 @@
     
     # 301 redirect /index.html or /index.htm to root (prefer clean homepage URL)
     RewriteRule ^index(\.html?|\.htm)?$ / [L,R=301,NC]
+    
+    # 301 redirect book-consultation.html to homepage (mask as homepage in search)
+    RewriteRule ^book-consultation(\.html?)?$ / [L,R=301,NC]
 </IfModule>
 
 <IfModule mod_headers.c>
