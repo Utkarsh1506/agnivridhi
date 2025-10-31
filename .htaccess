@@ -1,0 +1,23 @@
+# .htaccess for Agnivridhi India
+# - Force HTTPS
+# - Canonicalize to non-www (https://agnivridhiindia.com)
+# - Redirect /privacy -> /privacy-policy.html
+# - Add X-Robots-Tag header for /admin to help deindexing
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Force HTTPS and non-www canonical (redirect www -> non-www)
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://agnivridhiindia.com%{REQUEST_URI} [L,R=301]
+
+  # Redirect legacy /privacy path to canonical privacy-policy.html
+  RewriteRule ^privacy/?$ /privacy-policy.html [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Mark admin paths as noindex so Google will deindex them when re-crawled.
+  SetEnvIf Request_URI "^/admin" AG_ADMIN
+  Header set X-Robots-Tag "noindex, nofollow" env=AG_ADMIN
+</IfModule>
