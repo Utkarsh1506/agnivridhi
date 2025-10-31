@@ -43,6 +43,11 @@
     .legal-note { font-size:0.9rem; color:#495057; background:#f8f9fa; border-left:4px solid #e9ecef; padding:0.75rem 1rem; border-radius:4px; }
     .legal-body p { max-width:48rem; }
     @media (max-width: 767px) { .legal-body p { max-width:100%; } }
+
+    /* Navbar logo columns - match homepage layout so logos align */
+    .navbar-brand .column { float: left; width: 33.33%; padding: 5px; }
+    .navbar-brand .row::after { content: ""; clear: both; display: table; }
+    .navbar-brand img { height: 40px; display: block; }
     </style>
 
 </head>
