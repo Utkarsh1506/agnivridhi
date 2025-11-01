@@ -12,7 +12,6 @@ $htmlFiles = @(
     "success-stories.html",
     "404.html",
     "500.html",
-    "cgtmse-eluxcart.html",
     "cgtmse-hamarapetrol.html",
     "funding-priyakirana.html"
 )

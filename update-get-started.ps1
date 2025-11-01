@@ -10,7 +10,6 @@ $files = @(
     "team.html",
     "success-stories.html",
     "500.html",
-    "cgtmse-eluxcart.html",
     "cgtmse-hamarapetrol.html",
     "funding-priyakirana.html"
 )
