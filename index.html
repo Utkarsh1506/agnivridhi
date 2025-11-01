@@ -64,40 +64,52 @@
             <meta name="twitter:description" content="Expert guidance for MSMEs: government schemes, collateral-free loans, certifications, and digital growth." />
             <meta name="twitter:image" content="https://agnivridhiindia.com/img/logo.png" />
 
-            <!-- JSON-LD: WebSite & Organization -->
-            <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                "name": "Agnivridhi India",
-                "url": "https://agnivridhiindia.com/",
-                "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": "https://agnivridhiindia.com/?s={search_term_string}",
-                    "query-input": "required name=search_term_string"
-                }
-            }
-            </script>
-        <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Agnivridhi India",
-            "url": "https://agnivridhiindia.com/",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://agnivridhiindia.com/img/logo.png"
-            },
-            "image": "https://agnivridhiindia.com/img/logo.png",
-            "contactPoint": [{
-                "@type": "ContactPoint",
-                "telephone": "+91-9289555190",
-                "contactType": "customer support",
-                "areaServed": "IN",
-                "availableLanguage": ["en", "hi"]
-            }]
-        }
-        </script>
+                        <!-- JSON-LD: WebSite + Organization (single graph) -->
+                        <script type="application/ld+json">
+                        {
+                            "@context": "https://schema.org",
+                            "@graph": [
+                                {
+                                    "@type": "Organization",
+                                    "@id": "https://agnivridhiindia.com/#org",
+                                    "name": "Agnivridhi India",
+                                    "url": "https://agnivridhiindia.com/",
+                                    "logo": {
+                                        "@type": "ImageObject",
+                                        "url": "https://agnivridhiindia.com/img/logo.png",
+                                        "width": 500,
+                                        "height": 500
+                                    },
+                                    "image": "https://agnivridhiindia.com/img/logo.png",
+                                    "contactPoint": [
+                                        {
+                                            "@type": "ContactPoint",
+                                            "telephone": "+91-9289555190",
+                                            "contactType": "customer support",
+                                            "areaServed": "IN",
+                                            "availableLanguage": ["en", "hi"]
+                                        }
+                                    ],
+                                    "sameAs": [
+                                        "https://www.facebook.com/yourpage",
+                                        "https://www.linkedin.com/in/yourprofile"
+                                    ]
+                                },
+                                {
+                                    "@type": "WebSite",
+                                    "@id": "https://agnivridhiindia.com/#website",
+                                    "url": "https://agnivridhiindia.com/",
+                                    "name": "Agnivridhi India",
+                                    "publisher": {"@id": "https://agnivridhiindia.com/#org"},
+                                    "potentialAction": {
+                                        "@type": "SearchAction",
+                                        "target": "https://agnivridhiindia.com/?s={search_term_string}",
+                                        "query-input": "required name=search_term_string"
+                                    }
+                                }
+                            ]
+                        }
+                        </script>
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
