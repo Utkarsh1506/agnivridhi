@@ -52,7 +52,7 @@ if (file_exists($configPath)) {
 
     // Google Sheets Integration (Alternative to CRM)
     define('GOOGLE_SHEETS_ENABLED', true); // Set to true when ready
-    define('GOOGLE_SHEETS_URL', 'https://script.google.com/macros/s/AKfycbxI0HgjNDeWgfmoQwXHvZG94459PQ5SOuoD_xDYSgXjutTcLKclDUPcgn1krdZ3xGJI/exec');
+    define('GOOGLE_SHEETS_URL', 'https://script.google.com/macros/s/AKfycbxhXssWcCEYQarFtOakmxU4iizigxPbPUiPf-_-Bb368ZFpB45GEw0lrKpXYgdk9Ix3/exec');
 
     // reCAPTCHA Configuration (fallback placeholder)
     define('RECAPTCHA_SECRET_KEY', '6Lc0DP0rAAAAALzusQ2hOtojKuLB-agshcJSsGX-');

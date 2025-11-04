@@ -430,19 +430,16 @@ function sendAdminNotification(data, referenceId) {
           </tr>
           <tr>
             <td style="padding: 6px 10px; color: #666;">Transaction ID</td>
-            <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.transactionId)}</td>
+            <td style="padding: 6px 10px; color: #111;">${escapeHtml(data.transactionId)}</td>
           </tr>
           <tr>
             <td style="padding: 6px 10px; color: #666;">UPI ID</td>
-            <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.upiId)}</td>
+            <td style="padding: 6px 10px; color: #111;">${escapeHtml(data.upiId)}</td>
           </tr>
           <tr>
             <td style="padding: 6px 10px; color: #666;">Payment Date & Time</td>
-            <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.paymentDate)} at \${escapeHtml(data.paymentTime)}</td>
+            <td style="padding: 6px 10px; color: #111;">${escapeHtml(data.paymentDate)} at ${escapeHtml(data.paymentTime)}</td>
           </tr>
-                        </tr>
-              ${paymentInfo}
-              <tr>
         `;
       }
       
@@ -454,7 +451,7 @@ function sendAdminNotification(data, referenceId) {
           </div>
         
           <div style="background: white; padding: 30px; border: 1px solid #ddd;">
-            <p style="font-size: 16px; color: #333; margin-top: 0;">Dear <strong>\${escapeHtml(data.fullName)}</strong>,</p>
+            <p style="font-size: 16px; color: #333; margin-top: 0;">Dear <strong>${escapeHtml(data.fullName)}</strong>,</p>
           
             <p style="font-size: 15px; color: #555; line-height: 1.6;">
               Thank you for reaching out to <strong>Agnivridhi India</strong>. We have successfully received your inquiry and our team will review it shortly.
@@ -462,7 +459,7 @@ function sendAdminNotification(data, referenceId) {
           
             <div style="background: #f0f9ff; padding: 15px; border-left: 4px solid #0891b2; margin: 20px 0;">
               <p style="margin: 0; color: #0891b2;"><strong>📋 Your Reference ID:</strong></p>
-              <p style="margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #155e75;">\${referenceId}</p>
+              <p style="margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #155e75;">${referenceId}</p>
               <p style="margin: 5px 0 0 0; font-size: 13px; color: #666;"><em>Please save this for future reference</em></p>
             </div>
 
@@ -471,52 +468,52 @@ function sendAdminNotification(data, referenceId) {
             <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
               <tr>
                 <td style="padding: 6px 10px; color: #666; width: 45%;">Submitted At</td>
-                <td style="padding: 6px 10px; color: #111;">\${submittedAt}</td>
+                <td style="padding: 6px 10px; color: #111;">${submittedAt}</td>
               </tr>
               <tr>
                 <td style="padding: 6px 10px; color: #666;">Full Name</td>
-                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.fullName)}</td>
+                <td style="padding: 6px 10px; color: #111;">${escapeHtml(data.fullName)}</td>
               </tr>
               <tr>
                 <td style="padding: 6px 10px; color: #666;">Email</td>
-                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.email)}</td>
+                <td style="padding: 6px 10px; color: #111;">${escapeHtml(data.email)}</td>
               </tr>
               <tr>
                 <td style="padding: 6px 10px; color: #666;">Mobile</td>
-                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.mobile)}</td>
+                <td style="padding: 6px 10px; color: #111;">${escapeHtml(data.mobile)}</td>
               </tr>
               <tr>
                 <td style="padding: 6px 10px; color: #666;">Business / Project</td>
-                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.businessName)}</td>
+                <td style="padding: 6px 10px; color: #111;">${escapeHtml(data.businessName)}</td>
               </tr>
               <tr>
                 <td style="padding: 6px 10px; color: #666;">Business Type</td>
-                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.businessType)}</td>
+                <td style="padding: 6px 10px; color: #111;">${escapeHtml(data.businessType)}</td>
               </tr>
               <tr>
                 <td style="padding: 6px 10px; color: #666;">Service / Subject</td>
-                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.serviceInterested)}</td>
+                <td style="padding: 6px 10px; color: #111;">${escapeHtml(data.serviceInterested)}</td>
               </tr>
               <tr>
                 <td style="padding: 6px 10px; color: #666;">Funding Required</td>
-                <td style="padding: 6px 10px; color: #111;">\${escapeHtml(data.fundingRequired)}</td>
+                <td style="padding: 6px 10px; color: #111;">${escapeHtml(data.fundingRequired)}</td>
               </tr>
               <tr style="background: #e0f2fe;">
                 <td style="padding: 6px 10px; color: #666;">📅 Preferred Date</td>
-                <td style="padding: 6px 10px; color: #111; font-weight: bold;">\${escapeHtml(data.preferredDate)}</td>
+                <td style="padding: 6px 10px; color: #111; font-weight: bold;">${escapeHtml(data.preferredDate)}</td>
               </tr>
               <tr style="background: #e0f2fe;">
                 <td style="padding: 6px 10px; color: #666;">🕐 Preferred Time</td>
-                <td style="padding: 6px 10px; color: #111; font-weight: bold;">\${escapeHtml(data.preferredTime)}</td>
+                <td style="padding: 6px 10px; color: #111; font-weight: bold;">${escapeHtml(data.preferredTime)}</td>
               </tr>
               <tr style="background: #dcfce7;">
                 <td style="padding: 6px 10px; color: #666;">👤 Consulting With</td>
-                <td style="padding: 6px 10px; color: #111; font-weight: bold;">\${escapeHtml(data.consultWith)}</td>
+                <td style="padding: 6px 10px; color: #111; font-weight: bold;">${escapeHtml(data.consultWith)}</td>
               </tr>
               ${paymentInfo}
               <tr>
                 <td style="padding: 6px 10px; color: #666; vertical-align: top;">Message</td>
-                <td style="padding: 6px 10px; color: #111; white-space: pre-wrap;">\${escapeHtml(data.message)}</td>
+                <td style="padding: 6px 10px; color: #111; white-space: pre-wrap;">${escapeHtml(data.message)}</td>
               </tr>
             </table>
           </div>

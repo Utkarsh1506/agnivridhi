@@ -393,7 +393,7 @@
         }
         
         // Use GET with query params - simple and works with no-cors
-        var googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxI0HgjNDeWgfmoQwXHvZG94459PQ5SOuoD_xDYSgXjutTcLKclDUPcgn1krdZ3xGJI/exec';
+        var googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxhXssWcCEYQarFtOakmxU4iizigxPbPUiPf-_-Bb368ZFpB45GEw0lrKpXYgdk9Ix3/exec';
         
         var params = new URLSearchParams();
         params.append('fullName', formData.fullName);
@@ -538,7 +538,7 @@
         }
         
         // Send to Google Sheets
-        var googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxI0HgjNDeWgfmoQwXHvZG94459PQ5SOuoD_xDYSgXjutTcLKclDUPcgn1krdZ3xGJI/exec';
+        var googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbxhXssWcCEYQarFtOakmxU4iizigxPbPUiPf-_-Bb368ZFpB45GEw0lrKpXYgdk9Ix3/exec';
         
         var params = new URLSearchParams();
         params.append('fullName', formData.fullName);
