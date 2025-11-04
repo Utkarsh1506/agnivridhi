@@ -7,6 +7,20 @@
     { "source": "/testimonial", "destination": "/success-stories", "permanent": true },
     { "source": "/testimonial.html", "destination": "/success-stories", "permanent": true },
     { "source": "/offers", "destination": "/success-stories", "permanent": true },
-    { "source": "/testimonials", "destination": "/success-stories", "permanent": true }
+    { "source": "/testimonials", "destination": "/success-stories", "permanent": true },
+    { "source": "/cgtmse-eluxcart", "destination": "/success-stories", "permanent": true },
+    { "source": "/cgtmse-eluxcart.html", "destination": "/success-stories", "permanent": true },
+    { "source": "/admin", "destination": "/404", "permanent": false },
+    { "source": "/admin/:path*", "destination": "/404", "permanent": false }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "status": 404,
+      "dest": "/404.html"
+    }
   ]
 }

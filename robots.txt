@@ -1,28 +1,15 @@
+# Robots.txt for Agnivridhi India
+# Updated: November 4, 2025
+
 User-agent: *
-# allow crawling of the public site
 Allow: /
 
-# block sensitive or non-SEO endpoints
+# Block sensitive directories
 Disallow: /admin/
 Disallow: /api/
 Disallow: /wp-admin/
 Disallow: /cgi-bin/
+Disallow: /scripts/
 
-# Crawl-delay can be set for polite crawling (not all bots respect it)
-# Crawl-delay: 10
-
-# Sitemap
-Sitemap: https://agnivridhiindia.com/sitemap.xml
-
-# Note: if you later host different language versions, consider adding
-# hreflang and language-specific sitemaps.User-agent: *
-Disallow:
-
-Sitemap: https://agnivridhiindia.com/sitemap.xml
-
-# If you have staging or admin paths to block, add them here, e.g.:
-# Disallow: /staging/
-# Robots.txt for Agnivridhi India
-User-agent: *
-Allow: /
+# Sitemap location
 Sitemap: https://agnivridhiindia.com/sitemap.xml
