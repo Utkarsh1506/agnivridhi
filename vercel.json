@@ -13,6 +13,32 @@
     { "source": "/admin", "destination": "/404", "permanent": false },
     { "source": "/admin/:path*", "destination": "/404", "permanent": false }
   ],
+  "headers": [
+    {
+      "source": "/img/favicon.ico",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/img/favicon-32.png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/img/favicon.png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/img/apple-touch-icon.png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    }
+  ],
   "routes": [
     {
       "handle": "filesystem"

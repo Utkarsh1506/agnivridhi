@@ -3,6 +3,8 @@ Favicon generation instructions
 Goal
 - Generate PNG favicons (16,32,48,64,96,128,180) and a multi-size favicon.ico from `img/favicon2.svg`.
 
+> Updating how the favicon appears in Google Search results? See `docs/FAVICON_UPDATE.md` for Search Console steps and repository-specific integration guidance.
+
 Option A — Automatic (recommended)
 1. Install ImageMagick (provides `magick`) on Windows:
    - If you have Chocolatey:
