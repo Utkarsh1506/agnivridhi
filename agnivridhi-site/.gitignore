@@ -1,0 +1,99 @@
+# Agnivridhi India - Git Ignore File
+# Protects sensitive information from being committed
+
+# Next.js
+/.next/
+/out/
+/build
+.next
+*.tsbuildinfo
+next-env.d.ts
+
+# Environment Variables
+.env
+.env.local
+.env.production
+.env.development
+.env*.local
+
+# Configuration files with credentials
+api/config.php
+config.php
+
+# API Keys and Secrets
+*secret*
+*apikey*
+*credentials*
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+api/logs/
+
+# Testing
+/coverage
+.nyc_output
+
+# Production
+/dist
+/build
+
+# Misc
+.DS_Store
+*.pem
+Thumbs.db
+desktop.ini
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+
+# Backups
+backups/
+*.sql
+*.csv
+api/backups/
+
+# Database
+*.sqlite
+*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Test files
+test-*.html
+debug-*.php
+
+# Private notes
+PRIVATE-NOTES.md
+TODO-PRIVATE.md

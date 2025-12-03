@@ -1,0 +1,35 @@
+# Robots.txt for Agnivridhi India
+# Allow all crawlers to access all content
+
+User-agent: *
+Allow: /
+
+# Disallow sensitive areas
+Disallow: /api/
+Disallow: /_next/
+
+# Sitemap location
+Sitemap: https://agnivridhiindia.com/sitemap.xml
+
+# Crawl delay (in seconds) - optional, helps prevent server overload
+Crawl-delay: 1
+
+# Allow specific search engines (Google, Bing, etc.)
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots (optional - add known malicious crawlers)
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /

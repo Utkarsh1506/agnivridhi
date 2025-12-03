@@ -1,0 +1,31 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Deploy to Hostinger via SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOSTINGER_HOST }}
+        username: ${{ secrets.HOSTINGER_USERNAME }}
+        password: ${{ secrets.HOSTINGER_PASSWORD }}
+        script: |
+          cd domains/agnivridhiindia.com/public_html
+          git pull origin main
+          npm install --production
+          npm run build
+          pm2 restart agnivridhi || pm2 start npm --name "agnivridhi" -- start
+          pm2 save
+    
+    - name: Deployment Status
+      run: echo "✅ Deployed to Hostinger successfully!"
