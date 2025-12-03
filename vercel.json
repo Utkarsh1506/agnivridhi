@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd agnivridhi-site && npm run build",
+  "outputDirectory": "agnivridhi-site/out",
+  "installCommand": "cd agnivridhi-site && npm install"
+}
