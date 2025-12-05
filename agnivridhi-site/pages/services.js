@@ -104,6 +104,73 @@ export default function Services() {
     },
   ];
 
+  const itServices = [
+    {
+      title: 'Custom Software Development',
+      description: 'Tailored software solutions including CRM, ERP, and business automation systems',
+      link: '/contact',
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+      )
+    },
+    {
+      title: 'Mobile App Development',
+      description: 'iOS and Android apps with seamless user experience and modern features',
+      link: '/contact',
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+      )
+    },
+    {
+      title: 'Cloud Solutions & Migration',
+      description: 'AWS, Azure, Google Cloud setup, migration, and managed services',
+      link: '/contact',
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+      )
+    },
+    {
+      title: 'IT Infrastructure & Support',
+      description: 'Network setup, server management, cybersecurity, and 24/7 IT support',
+      link: '/contact',
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+      )
+    },
+    {
+      title: 'E-commerce Solutions',
+      description: 'Complete online store setup with payment gateway, inventory, and logistics integration',
+      link: '/contact',
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+      )
+    },
+    {
+      title: 'AI & Automation',
+      description: 'Machine learning, chatbots, process automation, and intelligent business solutions',
+      link: '/contact',
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      )
+    },
+    {
+      title: 'Data Analytics & BI',
+      description: 'Business intelligence dashboards, data visualization, and predictive analytics',
+      link: '/contact',
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      )
+    },
+    {
+      title: 'DevOps & CI/CD',
+      description: 'Automated deployment pipelines, container orchestration, and infrastructure as code',
+      link: '/contact',
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      )
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -277,6 +344,56 @@ export default function Services() {
                     Learn More
                     <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* IT Services */}
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-cyan-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold text-dark mb-4">
+                  IT Consultancy Services
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Complete technology solutions from software development to cloud infrastructure
+                </p>
+              </motion.div>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {itServices.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}
+                  className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-cyan-300 cursor-pointer group transition-all"
+                  onClick={() => window.location.href = service.link}
+                >
+                  <div className="w-14 h-14 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      {service.icon}
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">{service.title}</h3>
+                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">{service.description}</p>
+                  <div className="flex items-center text-blue-600 font-semibold text-sm group-hover:translate-x-2 transition-transform">
+                    Learn More
+                    <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
                 </motion.div>

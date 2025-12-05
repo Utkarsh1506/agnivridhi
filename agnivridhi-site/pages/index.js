@@ -166,7 +166,7 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              {/* Business Growth */}
+              {/* Business Growth & IT Services */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -178,14 +178,18 @@ export default function Home() {
                   <div className="w-16 h-16 bg-gradient-to-r from-cyan-600 to-teal-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <CodeBracketIcon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Business Growth</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Growth & IT Solutions</h3>
                   <p className="text-gray-600 mb-6 leading-relaxed">
-                    Digital presence and strategic consulting for scaling your business
+                    Digital transformation, software development, and strategic consulting
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-2 text-gray-700">
                       <CheckCircleIcon className="w-5 h-5 text-cyan-600 flex-shrink-0 mt-0.5" />
-                      <span>Web & App Development</span>
+                      <span>Custom Software & Apps</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-gray-700">
+                      <CheckCircleIcon className="w-5 h-5 text-cyan-600 flex-shrink-0 mt-0.5" />
+                      <span>Cloud & Infrastructure</span>
                     </li>
                     <li className="flex items-start gap-2 text-gray-700">
                       <CheckCircleIcon className="w-5 h-5 text-cyan-600 flex-shrink-0 mt-0.5" />
@@ -193,7 +197,7 @@ export default function Home() {
                     </li>
                     <li className="flex items-start gap-2 text-gray-700">
                       <CheckCircleIcon className="w-5 h-5 text-cyan-600 flex-shrink-0 mt-0.5" />
-                      <span>Strategy Consulting</span>
+                      <span>AI & Automation</span>
                     </li>
                   </ul>
                   <Link
