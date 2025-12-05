@@ -18,17 +18,12 @@ export default function Contact() {
     setStatus('sending');
     
     try {
-      // Get reCAPTCHA token if available
-      let recaptchaToken = '';
-      if (typeof window !== 'undefined' && window.grecaptcha) {
-        recaptchaToken = await window.grecaptcha.execute(
-          process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-          { action: 'submit' }
-        );
-      }
-
-      const response = await fetch('/api/consultation', {
+      const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbxhXssWcCEYQarFtOakmxU4iizigxPbPUiPf-_-Bb368ZFpB45GEw0lrKpXYgdk9Ix3/exec';
+      
+      // Send data to Google Apps Script
+      const response = await fetch(googleAppsScriptUrl, {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -41,20 +36,13 @@ export default function Contact() {
           fundingRequired: 'Not specified',
           serviceInterested: formData.subject,
           message: formData.message,
-          recaptchaToken
         }),
       });
 
-      const data = await response.json();
-
-      if (data.success) {
-        setStatus('success');
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-        setTimeout(() => setStatus(''), 5000);
-      } else {
-        setStatus('error');
-        setTimeout(() => setStatus(''), 5000);
-      }
+      // Since we're using no-cors mode, we assume success if no error is thrown
+      setStatus('success');
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setTimeout(() => setStatus(''), 5000);
     } catch (error) {
       console.error('Form submission error:', error);
       setStatus('error');
