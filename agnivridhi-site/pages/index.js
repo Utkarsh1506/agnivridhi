@@ -1,8 +1,10 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import HeroLottie from '../components/HeroLottie'
 import TestimonialsCarousel from '../components/TestimonialsCarousel'
+import ConsultationModal from '../components/ConsultationModal'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { 
@@ -18,6 +20,7 @@ import {
 } from '@heroicons/react/24/outline'
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const homeStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -385,7 +388,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.button
-                  onClick={() => window.openConsultationModal?.()}
+                  onClick={() => setIsModalOpen(true)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-10 py-5 bg-gradient-to-r from-cyan-600 to-teal-600 text-white font-bold rounded-full text-lg hover:shadow-2xl transition-all"
@@ -404,6 +407,7 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
+        <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </Layout>
     </>
   )

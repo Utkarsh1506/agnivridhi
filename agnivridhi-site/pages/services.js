@@ -1,9 +1,12 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import Layout from '../components/Layout';
+import ConsultationModal from '../components/ConsultationModal';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 export default function Services() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const fundingServices = [
     {
       title: 'CGTMSE Loans',
@@ -299,7 +302,7 @@ export default function Services() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.button
-                  onClick={() => window.openConsultationModal?.()}
+                  onClick={() => setIsModalOpen(true)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-white text-cyan-600 font-bold px-10 py-5 rounded-full text-lg hover:shadow-2xl transition-all"
@@ -318,6 +321,7 @@ export default function Services() {
             </motion.div>
           </div>
         </section>
+        <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </Layout>
     </>
   );

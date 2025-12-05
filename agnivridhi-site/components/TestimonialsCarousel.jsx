@@ -106,12 +106,12 @@ export default function TestimonialsCarousel() {
               className="min-w-[350px] md:min-w-[400px] flex-shrink-0"
             >
               <div className="bg-white rounded-2xl shadow-xl overflow-hidden h-full hover:shadow-2xl transition-all duration-300">
-                <div className="relative h-48">
+                <div className="relative h-56 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
                   <img
                     src={item.image}
                     alt={item.company}
                     loading="lazy"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="px-4 py-2 bg-gradient-to-r from-cyan-600 to-teal-600 text-white text-xs font-semibold rounded-full">
