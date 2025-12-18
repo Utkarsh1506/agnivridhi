@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import HeroLottie from '../components/HeroLottie'
@@ -18,9 +18,33 @@ import {
   ChartBarIcon,
   UserGroupIcon
 } from '@heroicons/react/24/outline'
+import { TrophyIcon, PlayIcon } from '@heroicons/react/24/solid'
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const videoRef = useRef(null);
+  const [videoProgress, setVideoProgress] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const onTimeUpdate = () => {
+      const pct = v.duration ? (v.currentTime / v.duration) * 100 : 0;
+      setVideoProgress(pct);
+    };
+    const onPlay = () => setIsVideoPlaying(true);
+    const onPause = () => setIsVideoPlaying(false);
+    v.addEventListener('timeupdate', onTimeUpdate);
+    v.addEventListener('play', onPlay);
+    v.addEventListener('pause', onPause);
+    onTimeUpdate();
+    return () => {
+      v.removeEventListener('timeupdate', onTimeUpdate);
+      v.removeEventListener('play', onPlay);
+      v.removeEventListener('pause', onPause);
+    };
+  }, []);
   const homeStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -63,6 +87,276 @@ export default function Home() {
       <Layout>
         {/* Hero Section with Lottie */}
         <HeroLottie />
+
+        {/* Featured In Section - Magazine Style */}
+        <section className="py-16 bg-gradient-to-br from-gray-50 via-white to-cyan-50">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <p className="text-sm font-bold text-cyan-600 uppercase tracking-widest">Media Coverage</p>
+              <h3 className="mt-3 text-3xl md:text-4xl font-bold text-gray-900">Featured in Leading Publications</h3>
+              <p className="mt-2 text-gray-600 max-w-2xl mx-auto">Our founder's journey has been recognized and featured across India's most respected business and entrepreneurship magazines</p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {[
+                { 
+                  name: 'Asia Connect Magazine', 
+                  title: 'Building Agnivridhi India as a Platform for Growth and Possibility',
+                  image: '/img/magazine-asia-connect.jpg',
+                  description: '',
+                  url: 'https://asiaconnectmagazine.com/rahul-kumar-singh-building-agnivridhi-india-as-a-platform-for-growth-and-possibility/' 
+                },
+                { 
+                  name: 'Success Magazine', 
+                  title: 'Creating Opportunities Through Vision and Responsibility',
+                  image: '/img/magazine-success.png',
+                  description: 'Today, Agnivridhi India offers a range of business support and professional development services aimed at strengthening operational efficiency, improving professional readiness, and building long-term credibility.',
+                  url: 'https://successmagazine.in/rahul-kumar-singh-creating-opportunities-through-vision-and-responsibility/' 
+                },
+                { 
+                  name: 'Brandz Magazine', 
+                  title: 'A Young Visionary Building Pathways for Sustainable Growth',
+                  image: '/img/magazine-brandz.jpg',
+                  description: '',
+                  url: 'https://brandzmagazine.com/rahul-kumar-singh-a-young-visionary-building-pathways-for-sustainable-growth/' 
+                },
+                { 
+                  name: 'CEO India Magazine', 
+                  title: 'Transforming Ambition into Action Through Agnivridhi India',
+                  image: '/img/magazine-ceo-india.jpg',
+                  description: '',
+                  url: 'https://ceoindiamagazine.com/rahul-kumar-singh-transforming-ambition-into-action-through-agnivridhi-india/' 
+                },
+                { 
+                  name: 'Business Matters', 
+                  title: 'Building a Future of Confidence, Clarity and Responsible Growth',
+                  image: '/img/magazine-business-matters.jpg',
+                  description: '',
+                  url: 'https://businessmatters.in/rahul-kumar-singh-building-a-future-of-confidence-clarity-and-responsible-growth/' 
+                },
+                { 
+                  name: 'Founder Magazine', 
+                  title: 'Nurturing Growth Through Purpose-Driven Entrepreneurship',
+                  image: '/img/magazine-founder.jpg',
+                  description: '',
+                  url: 'https://foundermagazine.in/rahul-kumar-singh-nurturing-growth-through-purpose-driven-entrepreneurship/' 
+                }
+              ].map((pub, index) => (
+                <motion.a
+                  key={index}
+                  href={pub.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 32, scale: 0.92 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.08, duration: 0.4 }}
+                  whileHover={{ y: -12, scale: 1.03, transition: { duration: 0.2 } }}
+                  className="group flex flex-col overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white border border-gray-200"
+                >
+                  {/* Magazine Cover Image */}
+                  <div className="relative h-64 bg-gradient-to-br from-cyan-100 to-teal-100 overflow-hidden">
+                    <img
+                      src={pub.image}
+                      alt={pub.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.parentElement.classList.add('flex', 'items-center', 'justify-center');
+                        e.target.parentElement.innerHTML = '<div class="text-center p-6"><div class="text-6xl mb-3">📰</div><p class="text-cyan-700 font-bold text-lg">' + pub.name + '</p></div>';
+                      }}
+                    />
+                    {/* Gradient overlay for better text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                    
+                    {/* Featured Badge */}
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-cyan-600 to-teal-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                      Featured 2024
+                    </div>
+                  </div>
+
+                  {/* Magazine Details */}
+                  <div className="p-5 flex-1 flex flex-col bg-white">
+                    <div className="mb-3 pb-3 border-b border-gray-200">
+                      <p className="text-xs font-bold uppercase tracking-wider text-cyan-600 mb-1" style={{ fontFamily: 'Georgia, serif' }}>Publication</p>
+                      <h4 className="text-gray-900 font-black text-lg leading-tight group-hover:text-cyan-700 transition-colors" style={{ fontFamily: 'Georgia, serif' }}>
+                        {pub.name}
+                      </h4>
+                    </div>
+
+                    <p className="text-gray-700 text-sm font-semibold leading-snug mb-2 line-clamp-2" style={{ fontFamily: 'Georgia, serif' }}>
+                      {pub.title}
+                    </p>
+
+                    {pub.description && (
+                      <p className="text-gray-600 text-xs leading-relaxed mb-4 line-clamp-3 italic" style={{ fontFamily: 'Georgia, serif' }}>
+                        "{pub.description}"
+                      </p>
+                    )}
+
+                    <div className="flex items-center gap-2 text-cyan-700 text-sm font-bold group-hover:gap-3 transition-all mt-auto" style={{ fontFamily: 'Georgia, serif' }}>
+                      <span>Read Full Article</span>
+                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Bottom accent stripe */}
+                  <div className="h-1 bg-gradient-to-r from-cyan-600 to-teal-600" />
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Achievements Spotlight (Top) - Revamped */}
+        <section className="py-16 bg-gradient-to-br from-cyan-50 via-white to-teal-50">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold text-cyan-700 bg-cyan-100/60 border border-cyan-200">
+                <TrophyIcon className="w-4 h-4" /> Awards & Achievements
+              </span>
+              <h2 className="mt-4 text-3xl md:text-4xl font-extrabold text-gray-900">Recognition That Builds Trust</h2>
+              <p className="text-gray-600 max-w-3xl mx-auto mt-3">A quick showcase of our recent honors and client milestones across funding and technology.</p>
+            </motion.div>
+
+            <div className="columns-1 md:columns-3 gap-8 max-w-7xl mx-auto">
+              {/* Card 1 */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.05 }}
+                whileHover={{ rotate: -0.5, y: -4, scale: 1.01 }}
+                className="group bg-white/80 backdrop-blur rounded-2xl border border-cyan-100 shadow-sm hover:shadow-xl transition-all mb-8"
+                style={{ breakInside: 'avoid' }}
+              >
+                <div className="relative aspect-[4/3]">
+                  <img src="/img/award-team-1.jpeg" alt="Team receiving national award" className="w-full h-full object-cover" />
+                  <span className="absolute top-3 left-3 px-3 py-1 text-xs font-bold rounded-full text-white bg-gradient-to-r from-cyan-600 to-teal-600 shadow-md">National Spotlight</span>
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-2 py-1 text-xs rounded-full border border-cyan-200 text-cyan-700 font-semibold bg-cyan-50">MSME Excellence</span>
+                    <span className="text-gray-500 text-xs">2025</span>
+                  </div>
+                  <h6 className="text-base font-semibold text-gray-900 mb-1">Recognized for Enabling Growth</h6>
+                  <p className="text-sm text-gray-600">Funding readiness, compliance, and digital enablement that unlocked faster scale.</p>
+                </div>
+              </motion.div>
+
+              {/* Card 2 */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.15 }}
+                whileHover={{ rotate: 0.5, y: -4, scale: 1.01 }}
+                className="group bg-white/80 backdrop-blur rounded-2xl border border-teal-100 shadow-sm hover:shadow-xl transition-all mb-8"
+                style={{ breakInside: 'avoid' }}
+              >
+                <div className="relative aspect-[4/3]">
+                  <img src="/img/award-team-2.jpeg" alt="Award ceremony stage moment" className="w-full h-full object-cover" />
+                  <span className="absolute top-3 left-3 px-3 py-1 text-xs font-bold rounded-full text-white bg-gradient-to-r from-teal-600 to-cyan-600 shadow-md">Client Success</span>
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-2 py-1 text-xs rounded-full border border-teal-200 text-teal-700 font-semibold bg-teal-50">Impact Delivery</span>
+                    <span className="text-gray-500 text-xs">Funding + Tech</span>
+                  </div>
+                  <h6 className="text-base font-semibold text-gray-900 mb-1">Celebrating Partner Wins</h6>
+                  <p className="text-sm text-gray-600">From CGTMSE approvals to go-live digital products across sectors.</p>
+                </div>
+              </motion.div>
+
+              {/* Card 3 (Video Teaser) */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.25 }}
+                whileHover={{ rotate: -0.3, y: -4, scale: 1.01 }}
+                className="group bg-white/80 backdrop-blur rounded-2xl border border-cyan-100 shadow-sm hover:shadow-xl transition-all mb-8"
+                style={{ breakInside: 'avoid' }}
+              >
+                <div className="relative aspect-video">
+                  <img src="/img/award-team-1.jpeg" alt="Highlights Poster" className="w-full h-full object-cover" />
+                  <span className="absolute top-3 left-3 px-3 py-1 text-xs font-bold rounded-full text-white bg-gradient-to-r from-cyan-600 to-teal-600 shadow-md">Highlights</span>
+                  <div className="absolute inset-0 bg-black/30 grid place-items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Link href="#achievements-video" className="px-4 py-2 rounded-full bg-white text-cyan-700 font-bold shadow">
+                      Watch Reel →
+                    </Link>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-2 py-1 text-xs rounded-full border border-cyan-200 text-cyan-700 font-semibold bg-cyan-50">Highlights Reel</span>
+                    <span className="text-gray-500 text-xs">Live</span>
+                  </div>
+                  <h6 className="text-base font-semibold text-gray-900 mb-1">A Quick Look at Our Journey</h6>
+                  <p className="text-sm text-gray-600">Snapshots of on-stage moments and client wins—tap to view full video.</p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Dedicated Video Section */}
+        <section id="achievements-video" className="py-20 bg-gradient-to-r from-cyan-600 to-teal-600">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="group relative rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/10"
+              >
+                <video ref={videoRef} className="w-full h-full" controls autoPlay loop playsInline muted preload="metadata" poster="/img/award-team-1.jpeg">
+                  <source src="/img/award-ceremony.mp4" type="video/mp4" />
+                </video>
+                {/* Pulse glow ring when playing */}
+                <div className={`absolute inset-0 rounded-2xl pointer-events-none ${isVideoPlaying ? 'opacity-40 animate-ping ring-4 ring-white/40' : 'opacity-0'}`}></div>
+                <div className="absolute inset-0 grid place-items-center pointer-events-none opacity-80 group-hover:opacity-0 transition-opacity">
+                  <div className="flex items-center justify-center w-16 h-16 rounded-full bg-white/20 backdrop-blur ring-2 ring-white/40">
+                    <PlayIcon className="w-8 h-8 text-white" />
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="text-white"
+              >
+                <h3 className="text-3xl md:text-4xl font-extrabold mb-4">On-Stage Moments & Client Wins</h3>
+                <p className="text-cyan-50 text-lg mb-6">A short reel capturing the energy, gratitude, and trust we’ve built while delivering funding, certifications, and digital launches.</p>
+                <div className="flex flex-wrap gap-3 mb-8">
+                  {['CGTMSE', 'PMEGP', 'Digital Launch', 'Certifications'].map((chip, i) => (
+                    <span key={i} className="px-3 py-1 text-sm rounded-full bg-white/10 border border-white/20">{chip}</span>
+                  ))}
+                </div>
+                <div className="flex gap-4">
+                  <Link href="/success-stories" className="px-6 py-3 bg-white text-cyan-700 font-bold rounded-full shadow hover:shadow-2xl transition-all">Explore Success Stories</Link>
+                  <a href="tel:+919289555190" className="px-6 py-3 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-cyan-700 transition-all">Call: +91 9289555190</a>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
 
         {/* Testimonials Carousel */}
         <TestimonialsCarousel />
@@ -305,72 +599,6 @@ export default function Home() {
                   </motion.div>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* The Agnivridhi Advantage */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h4 className="text-cyan-600 font-semibold text-lg mb-4">OUR OFFER</h4>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                The Agnivridhi Advantage
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                When you partner with us, you gain a strategic ally dedicated to your success
-              </p>
-            </motion.div>
-
-            <div className="space-y-16 max-w-6xl mx-auto">
-              {[
-                {
-                  title: "Unlock Maximum Financial Advantage",
-                  description: "We don't just find funding; we optimize it. Our expertise ensures you secure the highest possible subsidy (up to 35% with PMEGP), the most favorable loan terms, and access to grants you might have missed.",
-                  image: "/img/offer-1.jpg"
-                },
-                {
-                  title: "Gain Your Most Valuable Resource: Time",
-                  description: "Stop drowning in paperwork and bureaucratic red tape. We manage the entire application and documentation process from start to finish. This frees you to focus on what you do best—innovating, leading, and growing your business.",
-                  image: "/img/offer-2.jpg",
-                  reverse: true
-                }
-              ].map((offer, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: offer.reverse ? 30 : -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className={`flex flex-col ${offer.reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 items-center`}
-                >
-                  <div className="lg:w-1/2">
-                    <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                      <img
-                        src={offer.image}
-                        alt={offer.title}
-                        loading="lazy"
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
-                  </div>
-                  <div className="lg:w-1/2">
-                    <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">{offer.title}</h3>
-                    <p className="text-lg text-gray-600 leading-relaxed mb-8">{offer.description}</p>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="px-8 py-4 bg-gradient-to-r from-cyan-600 to-teal-600 text-white font-semibold rounded-full hover:shadow-xl transition-all"
-                    >
-                      Learn More →
-                    </motion.button>
-                  </div>
-                </motion.div>
-              ))}
             </div>
           </div>
         </section>

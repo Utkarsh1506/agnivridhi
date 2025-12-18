@@ -154,42 +154,59 @@ export default function SuccessStories() {
             {stories.map((story, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 32, scale: 0.92 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+                whileHover={{ y: -8, scale: 1.02 }}
                 className="group"
               >
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                  <div className="relative h-48 overflow-hidden">
+                <div className="rounded-xl bg-white border border-cyan-100 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col h-auto">
+                  {/* Avatar Section - Compact */}
+                  <div className="p-4 flex items-center gap-3 border-b border-cyan-50">
                     <img
                       src={story.image}
                       alt={story.company}
                       loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-12 h-12 rounded-full object-cover ring-3 ring-cyan-200 flex-shrink-0"
                     />
-                    <div className="absolute top-4 left-4">
-                      <span className="px-4 py-2 bg-gradient-to-r from-cyan-600 to-teal-600 text-white text-sm font-semibold rounded-full">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm font-bold text-gray-900 truncate group-hover:text-cyan-700 transition-colors">
+                        {story.company}
+                      </h3>
+                      <span className="inline-block px-2 py-0.5 mt-1 bg-gradient-to-r from-cyan-600 to-teal-600 text-white text-xs font-bold rounded-full">
                         {story.badge}
                       </span>
                     </div>
                   </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-cyan-600 transition-colors">
-                      {story.company}
-                    </h3>
-                    <h4 className="text-lg font-semibold mb-3 text-cyan-600">
+
+                  {/* Content Section */}
+                  <div className="p-4 flex flex-col gap-3 flex-1">
+                    <h4 className="text-base font-semibold text-cyan-700">
                       {story.title}
                     </h4>
-                    <p className="text-gray-600 leading-relaxed mb-6 flex-1">
+                    <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
                       {story.description}
                     </p>
+
+                    {/* Stars */}
+                    <div className="flex items-center gap-1 text-yellow-500">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* CTA Section */}
+                  <div className="px-4 py-3 border-t border-cyan-50 bg-gradient-to-r from-cyan-50 to-teal-50">
                     <Link
                       href={story.link}
-                      className="inline-flex items-center gap-2 text-cyan-600 font-semibold hover:gap-4 transition-all group"
+                      className="inline-flex items-center gap-1 text-cyan-700 font-bold text-sm hover:gap-2 transition-all group/link"
                     >
-                      Read Full Story
-                      <ArrowRightIcon className="w-5 h-5" />
+                      Read Story
+                      <ArrowRightIcon className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>

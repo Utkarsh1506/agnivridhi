@@ -71,10 +71,16 @@ export default function About() {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <div className="aspect-video bg-gradient-to-br from-cyan-500 to-teal-500 rounded-2xl shadow-2xl flex items-center justify-center">
-                  <svg className="w-32 h-32 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                  <img
+                    src="/img/award-team-1.jpeg"
+                    alt="Awards – Team recognition"
+                    className="w-full h-auto object-cover"
+                    loading="lazy"
+                  />
+                  <span className="absolute top-4 left-4 px-3 py-1 text-xs font-bold rounded-full text-white bg-gradient-to-r from-cyan-600 to-teal-600">
+                    Awards & Recognition
+                  </span>
                 </div>
               </motion.div>
             </div>

@@ -71,9 +71,9 @@ export default function TestimonialsCarousel() {
 
     const interval = setInterval(() => {
       currentIndex.current = (currentIndex.current + 1) % testimonials.length;
-      const scrollAmount = currentIndex.current * (carousel.offsetWidth / 3);
+      const scrollAmount = currentIndex.current * (carousel.offsetWidth / 2.5);
       carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-    }, 5000);
+    }, 3500);
 
     return () => clearInterval(interval);
   }, [testimonials.length]);
@@ -95,42 +95,63 @@ export default function TestimonialsCarousel() {
           </p>
         </motion.div>
 
-        <div ref={carouselRef} className="flex gap-6 overflow-x-auto scroll-smooth pb-4 hide-scrollbar">
+        <div ref={carouselRef} className="flex gap-4 overflow-x-auto scroll-smooth pb-4 hide-scrollbar">
           {testimonials.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 32, scale: 0.92 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="min-w-[350px] md:min-w-[400px] flex-shrink-0"
+              transition={{ duration: 0.4, delay: index * 0.08, ease: "easeOut" }}
+              whileHover={{ y: -12, scale: 1.05, transition: { duration: 0.2 } }}
+              className="min-w-[260px] md:min-w-[280px] flex-shrink-0 group"
             >
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden h-full hover:shadow-2xl transition-all duration-300">
-                <div className="relative h-56 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+              <div className="rounded-lg bg-white border border-cyan-100 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-auto max-h-[380px]">
+                {/* Avatar Section - Compact */}
+                <div className="p-3 flex items-center gap-2.5 border-b border-cyan-50">
                   <img
                     src={item.image}
                     alt={item.company}
                     loading="lazy"
-                    className="w-full h-full object-contain"
+                    className="w-10 h-10 rounded-full object-cover ring-2 ring-cyan-200 flex-shrink-0"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-4 py-2 bg-gradient-to-r from-cyan-600 to-teal-600 text-white text-xs font-semibold rounded-full">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-xs font-bold text-gray-900 truncate group-hover:text-cyan-700 transition-colors">
+                      {item.company}
+                    </h3>
+                    <span className="inline-block px-1.5 py-0.5 mt-0.5 bg-gradient-to-r from-cyan-600 to-teal-600 text-white text-xs font-bold rounded-full">
                       {item.badge}
                     </span>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">{item.company}</h3>
-                  <p className="text-cyan-600 font-semibold mb-3 text-sm">{item.title}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+
+                {/* Content Section */}
+                <div className="p-3 flex flex-col gap-2 flex-1">
+                  <h4 className="text-sm font-semibold text-cyan-700">
+                    {item.title}
+                  </h4>
+                  <p className="text-xs text-gray-600 leading-relaxed line-clamp-2">
                     {item.excerpt}
                   </p>
+
+                  {/* Stars */}
+                  <div className="flex items-center gap-0.5 text-yellow-500">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA Section */}
+                <div className="px-3 py-2 border-t border-cyan-50 bg-gradient-to-r from-cyan-50 to-teal-50">
                   <a
                     href={item.link}
-                    className="inline-flex items-center gap-2 text-cyan-600 font-semibold text-sm hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-0.5 text-cyan-700 font-bold text-xs hover:gap-1 transition-all group/link"
                   >
-                    Read More
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    Read Story
+                    <svg className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </a>
