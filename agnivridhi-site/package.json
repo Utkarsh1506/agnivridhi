@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "ANALYZE=true next build",
+    "sitemap": "echo 'Sitemap available at: https://agnivridhiindia.com/sitemap.xml'"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

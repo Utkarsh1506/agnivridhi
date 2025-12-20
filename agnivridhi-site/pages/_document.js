@@ -54,13 +54,18 @@ export default function Document() {
           rel="stylesheet"
         />
 
-        {/* Favicons */}
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="alternate icon" type="image/png" href="/favicon.png" />
+        {/* Favicons and App Icons */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/logo.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="msapplication-TileColor" content="#0891b2" />
+        <meta name="msapplication-TileImage" content="/logo.png" />
+        <meta name="theme-color" content="#0891b2" />
 
-        <meta name="description" content="Agnivridhi - One stop solution for MSMEs and Startups. Funding, compliance, and IT solutions." />
+        <meta name="description" content="Agnivridhi India - Expert business consulting for CGTMSE/MUDRA loans, PMEGP subsidies, GST & MSME certifications, ISO standards, digital marketing, and strategic growth solutions across India." />
       </Head>
       <body>
         {/* Google Tag Manager (noscript) */}
