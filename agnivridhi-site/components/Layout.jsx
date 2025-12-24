@@ -12,7 +12,8 @@ export default function Layout({ children }) {
   useEffect(() => {
     // Auto-show modal on first visit (after 2 seconds)
     const hasVisited = sessionStorage.getItem('hasVisitedBefore');
-    if (!hasVisited) {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 640; // Tailwind 'sm' breakpoint
+    if (!hasVisited && !isMobile) {
       const timer = setTimeout(() => {
         setShowModal(true);
         sessionStorage.setItem('hasVisitedBefore', 'true');
