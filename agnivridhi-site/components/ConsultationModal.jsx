@@ -80,32 +80,31 @@ export default function ConsultationModal({ isOpen, onClose }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
           />
 
           {/* Modal */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.2 }}
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl my-8 relative"
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl my-8 relative max-h-[85vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button */}
-              <button
-                onClick={onClose}
-                className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors z-10"
-                aria-label="Close modal"
-              >
-                <svg className="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-
               {/* Header */}
-              <div className="bg-gradient-hero text-white p-8 rounded-t-2xl">
+              <div className="bg-gradient-hero text-white p-8 rounded-t-2xl sticky top-0 z-10 relative">
+                {/* Close Button */}
+                <button
+                  onClick={onClose}
+                  className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+                  aria-label="Close modal"
+                >
+                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
                 <h2 className="text-3xl font-bold mb-2">Book Free Consultation</h2>
                 <p className="text-gray-100">Get expert advice for your business growth</p>
               </div>
@@ -284,6 +283,15 @@ export default function ConsultationModal({ isOpen, onClose }) {
                     <p className="text-center text-sm text-gray-500 mt-4">
                       By submitting, you agree to our Terms & Privacy Policy
                     </p>
+
+                    {/* Mobile-friendly close link */}
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      className="mt-2 w-full text-center text-sm text-gray-600 underline sm:hidden"
+                    >
+                      Close
+                    </button>
                   </form>
                 )}
               </div>
