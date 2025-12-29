@@ -10,15 +10,8 @@ export default function Layout({ children }) {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    // Auto-show modal on first visit (after 2 seconds)
-    const hasVisited = sessionStorage.getItem('hasVisitedBefore');
-    if (!hasVisited) {
-      const timer = setTimeout(() => {
-        setShowModal(true);
-        sessionStorage.setItem('hasVisitedBefore', 'true');
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
+    // Auto-open disabled: first-visit popup is suppressed on all devices
+    sessionStorage.setItem('hasVisitedBefore', 'true');
   }, []);
 
   // Make modal accessible globally via window object
