@@ -107,42 +107,42 @@ export default function Home() {
                 { 
                   name: 'Asia Connect Magazine', 
                   title: 'Building Agnivridhi India as a Platform for Growth and Possibility',
-                  image: '/img/magazine-asia-connect.jpg',
+                  image: '/img/asiaconnect.png',
                   description: '',
                   url: 'https://asiaconnectmagazine.com/rahul-kumar-singh-building-agnivridhi-india-as-a-platform-for-growth-and-possibility/' 
                 },
                 { 
                   name: 'Success Magazine', 
                   title: 'Creating Opportunities Through Vision and Responsibility',
-                  image: '/img/magazine-success.png',
+                  image: '/img/successmagazine.png',
                   description: 'Today, Agnivridhi India offers a range of business support and professional development services aimed at strengthening operational efficiency, improving professional readiness, and building long-term credibility.',
                   url: 'https://successmagazine.in/rahul-kumar-singh-creating-opportunities-through-vision-and-responsibility/' 
                 },
                 { 
                   name: 'Brandz Magazine', 
                   title: 'A Young Visionary Building Pathways for Sustainable Growth',
-                  image: '/img/magazine-brandz.jpg',
+                  image: '/img/brandzmagazine.png',
                   description: '',
                   url: 'https://brandzmagazine.com/rahul-kumar-singh-a-young-visionary-building-pathways-for-sustainable-growth/' 
                 },
                 { 
                   name: 'CEO India Magazine', 
                   title: 'Transforming Ambition into Action Through Agnivridhi India',
-                  image: '/img/magazine-ceo-india.jpg',
+                  image: '/img/ceoindiamagazine.png',
                   description: '',
                   url: 'https://ceoindiamagazine.com/rahul-kumar-singh-transforming-ambition-into-action-through-agnivridhi-india/' 
                 },
                 { 
                   name: 'Business Matters', 
                   title: 'Building a Future of Confidence, Clarity and Responsible Growth',
-                  image: '/img/magazine-business-matters.jpg',
+                  image: '/img/businessmattersmagazine.png',
                   description: '',
                   url: 'https://businessmatters.in/rahul-kumar-singh-building-a-future-of-confidence-clarity-and-responsible-growth/' 
                 },
                 { 
                   name: 'Founder Magazine', 
                   title: 'Nurturing Growth Through Purpose-Driven Entrepreneurship',
-                  image: '/img/magazine-founder.jpg',
+                  image: '/img/foundermagazine.png',
                   description: '',
                   url: 'https://foundermagazine.in/rahul-kumar-singh-nurturing-growth-through-purpose-driven-entrepreneurship/' 
                 }
