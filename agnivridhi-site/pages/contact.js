@@ -138,7 +138,7 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold text-dark mb-1">Location</h3>
                       <p className="text-gray-600">
-                        New Delhi, India
+                        H – 165, Sector 63 Rd, near honda showroom, H Block, Sector 63, Noida, Uttar Pradesh 201309
                       </p>
                     </div>
                   </div>

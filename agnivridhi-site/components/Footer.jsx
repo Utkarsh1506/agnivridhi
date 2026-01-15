@@ -12,7 +12,6 @@ import {
 export default function Footer() {
   const quickLinks = [
     { href: '/about', label: 'About Us' },
-    { href: '/team', label: 'Our Team' },
     { href: '/features', label: 'Features' },
     { href: '/services', label: 'Services' },
     { href: '/success-stories', label: 'Success Stories' },
@@ -143,7 +142,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-gray-400 leading-relaxed">
-                    NX-ONE, TechZone 4, Greater Noida West, UP-201306
+                    H – 165, Sector 63 Rd, near honda showroom, H Block, Sector 63, Noida, Uttar Pradesh 201309
                   </p>
                 </div>
               </div>
